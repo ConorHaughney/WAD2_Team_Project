@@ -1,10 +1,18 @@
 from django.db import models
 
-# Create your models here.
+class Category(models.Model):
+    NAME_MAX_LENGTH = 25
 
-# this is me testing the git branches - ben
+    NAME = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
 
-print("branch test")
+    def __str__(self):
+        return self.name
+    
+class Difficulty(models.model):
+    DIFFICULTY_MAX_LENGTH = 15
 
-# testing again
-print("another branch test")
+    difficulty = models.CharField(max_length=DIFFICULTY_MAX_LENGTH, unique=True)
+
+    def __str__(self):
+        return self.name
+
