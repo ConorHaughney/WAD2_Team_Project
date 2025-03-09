@@ -15,13 +15,13 @@
     <body>
         <div>
             <ul>
-                <li><a href="{% url 'Recipes:test' %}">Home</a></li>
-                <li><a href="{% url 'Recipes:test' %}">Recipes</a></li>
-                <li><a href="{% url 'Recipes:test' %}">Search</a></li>
+                <li><a href="{% url 'Recipes:home' %}">Home</a></li>
+                <li><a href="{% url 'Recipes:home' %}">Recipes</a></li>
+                <li><a href="{% url 'Recipes:home' %}">Search</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'Recipes:test' %}">Logout</a></li>
+                    <li><a href="{% url 'Recipes:home' %}">Logout</a></li>
                 {% else %}
-                    <li><a href="{% url 'Recipes:test' %}">Login</a></li>
+                    <li><a href="{% url 'Recipes:home' %}">Login</a></li>
                 {% endif %}
 
             </ul>
