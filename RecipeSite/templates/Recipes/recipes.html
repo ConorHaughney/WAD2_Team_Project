@@ -1,9 +1,33 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
     Recipes
 {% endblock %}
+
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/recipes.css' %}">
+{% endblock %}
+
 {% block body_block %}
-<div>
-</div>
+<div class="header2">
+    <div class="header-image">
+        <a href="{% url 'Recipes:home' %}">
+        <img src="{% static 'images/MostPopularImg.jpg' %}" alt="Picture of pasta" width="250" height="80">
+        <div class="caption">Most Popular</div>
+        </a>
+    </div>
+    <div class="header-image">
+        <a href="{% url 'Recipes:home' %}">
+        <img src="{% static 'images/YourFavourites.jpg' %}" alt="Picture of steak" width="250" height="80">
+        <div class="caption">Your Favourites</div>
+        </a>
+    </div>
+    <div class="header-image">
+        <a href="{% url 'Recipes:home' %}">
+        <img src="{% static 'images/AddYourRecipe.jpg' %}" alt="Picture of food prep" width="250" height="80">
+        <div class="caption">Add Your Recipe</div>
+        </a>
+    </div>
+</div>  
 {% endblock %}
