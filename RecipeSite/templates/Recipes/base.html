@@ -10,13 +10,15 @@
             {% block title_block %}
             {% endblock %}
         </title>
+        {% block css_block %}
+        {% endblock %}
     </head>
 
     <body>
         <div>
             <ul>
                 <li><a href="{% url 'Recipes:home' %}">Home</a></li>
-                <li><a href="{% url 'Recipes:home' %}">Recipes</a></li>
+                <li><a href="{% url 'Recipes:recipes' %}">Recipes</a></li>
                 <li><a href="{% url 'Recipes:home' %}">Search</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'Recipes:home' %}">Logout</a></li>

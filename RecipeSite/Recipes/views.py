@@ -3,3 +3,6 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'Recipes/home.html')
+
+def recipes(request):
+    return render(request, 'Recipes/recipes.html')
