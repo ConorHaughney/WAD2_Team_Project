@@ -1,17 +1,45 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
+
 
 {% block title_block %}
     Login
 {% endblock %}
+
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block body_block %}
-<div>
-<form id="login_form" method="post" action="{% url 'Recipes:login' %}">
-    {% csrf_token %}
-    Username: <input type="text" name="username" value="" size="50" />
-    <br />
-    Password: <input type="password" name="password" value="" size="50" />
-    <br />
-    <input type="submit" value="submit" />
-</form>
+<div class="container">
+
+    <div class="form-container">
+        <div class="form-box">
+
+            <form id="login_form" method="post" action="{% url 'Recipes:login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" />
+            </div>
+            <input type="submit" class="btn" value="Sign In" />
+            </form>
+
+
+            <div>
+                <br>
+                Not got an account?
+                <a href="{% url 'Recipes:create_account' %}" class="btn register-btn">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry" width="600", height="725">
+    </div>
 </div>
 {% endblock %}

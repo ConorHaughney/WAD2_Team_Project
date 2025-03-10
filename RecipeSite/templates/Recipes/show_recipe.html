@@ -1,0 +1,17 @@
+{% extends 'Recipes/base.html' %}
+
+{% block title_block %}
+    {% if recipe %}
+        {{ recipe.recipe_name }}
+    {% else %}
+        Unknown Recipe
+    {% endif %}
+{% endblock %}
+{% block body_block %}
+{% if recipe %}
+
+{% else %}
+<br>
+This recipe does not exist, why not <a href="{% url 'Recipes:add_recipe' %}">add your own!</a>
+{% endif %}
+{% endblock %}
