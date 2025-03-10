@@ -1,0 +1,28 @@
+.header2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    background-color: #404040;
+    position: fixed;
+    width: 100%;
+  }
+  
+  .header-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-image a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+
+  }
+  
+  .caption {
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
