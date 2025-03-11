@@ -22,12 +22,6 @@ def home(request):
 
 
 
-# def login(request):
-#     context_dict = {}
-#     return render(request, 'Recipes/login.html', context=context_dict)
-
-
-
 def recipes(request):
     context_dict = {}
     return render(request, 'Recipes/recipes.html', context=context_dict)
