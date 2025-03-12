@@ -1,8 +1,112 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
     Create an Account
 {% endblock %}
 {% block body_block %}
 
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/create_account.css' %}">
 {% endblock %}
+
+{% if registered %}
+Thank you for registering, why not <a href="{% url 'Recipes:recipes' %}">check out some recipes?</a> <br>
+<a href="{% url 'Recipes:home' %}">Return to the homepage.</a><br />
+{% else %}
+
+<div class="container">
+    <div class="form-container">
+        <div class="form-box">
+            <div class="title">
+            Register here!<br />
+            </div>
+            <form id="user_form" method="post" action="{% url 'Recipes:create_account' %}" 
+                enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="id_username">Username:</label>
+                    {{ user_form.username }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    {{ user_form.email }}
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="id_password">Password:</label>
+                    <input type="password" id="id_password" name="password" />
+                </div>
+                
+                <div class="form-group password-group">
+                    <label for="id_confirm_password">Confirm Password:</label>
+                    <input type="password" id="id_confirm_password" name="confirm_password" />
+                    <span id="password-match-message" style="color: red; font-size: 0.9em;"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_picture">Profile Picture:</label>
+                    <div class="picture-input-wrapper" style="display: flex; align-items: center;">
+                        <input type="file" id="id_picture" name="picture" />
+                        <img id="preview" src="#" alt="Profile picture preview" style="display: none; max-width: 150px; max-height: 70px; margin-left: 10px;">
+                
+                    </div>
+                </div>
+                <input type="submit" name="submit" value="Register" class="btn" />
+            </form>
+
+            <div>
+                <br>
+                Already got an account?
+                <a href="{% url 'Recipes:login' %}" class="btn register-btn">Log In</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry" width="600", height="740">
+    </div>
+</div>
+{% endif %}
+
+<script>
+    document.getElementById("id_picture").addEventListener("change", function(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var preview = document.getElementById("preview");
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+</script>
+<script>
+    const passwordInput = document.getElementById("id_password");
+    const confirmPasswordInput = document.getElementById("id_confirm_password");
+    const messageSpan = document.getElementById("password-match-message");
+
+    function validatePasswordMatch() {
+        if (passwordInput.value && confirmPasswordInput.value && passwordInput.value !== confirmPasswordInput.value) {
+            messageSpan.textContent = "Passwords do not match";
+        } else {
+            messageSpan.textContent = "";
+        }
+    }
+
+    passwordInput.addEventListener("input", validatePasswordMatch);
+    confirmPasswordInput.addEventListener("input", validatePasswordMatch);
+
+    document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    });
+</script>
+
+{% endblock %}
+

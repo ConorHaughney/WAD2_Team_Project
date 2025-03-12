@@ -15,7 +15,9 @@
 
     <div class="form-container">
         <div class="form-box">
-
+            <div class="title">
+                Log in here!<br />
+            </div>
             <form id="login_form" method="post" action="{% url 'Recipes:login' %}">
             {% csrf_token %}
             <div class="form-group">
@@ -39,7 +41,14 @@
     </div>
 
     <div class="image-container">
-        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry" width="600", height="725">
+        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry" width="600", height="740">
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.overflow = "hidden"; // Disable vertical scrolling
+    document.documentElement.style.overflow = "hidden"; // Ensures scrolling is disabled in HTML too
+});
+</script>
 {% endblock %}
