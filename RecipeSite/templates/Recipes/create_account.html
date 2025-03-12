@@ -7,17 +7,29 @@
 {% block body_block %}
 
 {% block css_block %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/create_account.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login_and_register.css' %}">
 {% endblock %}
 
-{% if registered %}
-Thank you for registering, why not <a href="{% url 'Recipes:recipes' %}">check out some recipes?</a> <br>
-<a href="{% url 'Recipes:home' %}">Return to the homepage.</a><br />
-{% else %}
+
 
 <div class="container">
     <div class="form-container">
         <div class="form-box">
+            {% if user.is_authenticated %}
+            <div class="authenticated">
+                Thank you for logging in!<br><br> 
+                Why not <a href="{% url 'Recipes:recipes' %}">check out some recipes?</a>
+                <br>
+                <br>
+                <a href="{% url 'Recipes:home' %}">Return to the homepage.</a><br />
+            </div>
+            {% elif registered %}
+            <div class="authenticated">
+                Registration successful!
+                <br><br> 
+                <a href="{% url 'Recipes:login' %}" class="btn">Log In</a>
+            </div>
+            {% else %}
             <div class="title">
             Register here!<br />
             </div>
@@ -48,12 +60,12 @@ Thank you for registering, why not <a href="{% url 'Recipes:recipes' %}">check o
                 
                 <div class="form-group">
                     <label for="id_picture">Profile Picture:</label>
-                    <div class="picture-input-wrapper" style="display: flex; align-items: center;">
+                    <div class="picture-input-wrapper">
                         <input type="file" id="id_picture" name="picture" />
-                        <img id="preview" src="#" alt="Profile picture preview" style="display: none; max-width: 150px; max-height: 70px; margin-left: 10px;">
-                
+                        <img id="preview" src="#" alt="Profile picture preview">
                     </div>
                 </div>
+                
                 <input type="submit" name="submit" value="Register" class="btn" />
             </form>
 
@@ -62,17 +74,22 @@ Thank you for registering, why not <a href="{% url 'Recipes:recipes' %}">check o
                 Already got an account?
                 <a href="{% url 'Recipes:login' %}" class="btn register-btn">Log In</a>
             </div>
-
+            {% endif %}
         </div>
     </div>
 
     <div class="image-container">
-        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry" width="600", height="740">
+        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry">
     </div>
+
 </div>
-{% endif %}
+
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
     document.getElementById("id_picture").addEventListener("change", function(event) {
         var input = event.target;
         if (input.files && input.files[0]) {
@@ -85,8 +102,8 @@ Thank you for registering, why not <a href="{% url 'Recipes:recipes' %}">check o
             reader.readAsDataURL(input.files[0]);
         }
     });
-</script>
-<script>
+
+
     const passwordInput = document.getElementById("id_password");
     const confirmPasswordInput = document.getElementById("id_confirm_password");
     const messageSpan = document.getElementById("password-match-message");
@@ -101,11 +118,7 @@ Thank you for registering, why not <a href="{% url 'Recipes:recipes' %}">check o
 
     passwordInput.addEventListener("input", validatePasswordMatch);
     confirmPasswordInput.addEventListener("input", validatePasswordMatch);
-
-    document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-    });
+});
 </script>
 
 {% endblock %}

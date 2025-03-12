@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block css_block %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login_and_register.css' %}">
 {% endblock %}
 
 {% block body_block %}
@@ -15,6 +15,15 @@
 
     <div class="form-container">
         <div class="form-box">
+            {% if user.is_authenticated %}
+            <div class="authenticated">
+                Thank you for logging in!<br><br> 
+                Why not <a href="{% url 'Recipes:recipes' %}">check out some recipes?</a>
+                <br>
+                <br>
+                <a href="{% url 'Recipes:home' %}">Return to the homepage.</a><br />
+            </div>
+            {% else %}
             <div class="title">
                 Log in here!<br />
             </div>
@@ -37,18 +46,19 @@
                 Not got an account?
                 <a href="{% url 'Recipes:create_account' %}" class="btn register-btn">Register</a>
             </div>
+            {% endif %}
         </div>
     </div>
 
     <div class="image-container">
-        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry" width="600", height="740">
+        <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry">
     </div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.overflow = "hidden"; // Disable vertical scrolling
-    document.documentElement.style.overflow = "hidden"; // Ensures scrolling is disabled in HTML too
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 });
 </script>
 {% endblock %}
