@@ -27,7 +27,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('picture',)
-<<<<<<< HEAD
 
 # Add Recipe form
 class RecipeForm(forms.ModelForm):
@@ -43,6 +42,3 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
         }
-=======
-        labels = {'picture': 'Profile picture',}
->>>>>>> 369cb78a5dd6d6e659df10806210399646e42651
