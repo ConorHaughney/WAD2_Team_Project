@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/baseStyle.css' %}">
+        <title>
+            RecipeSite - 
+            {% block title_block %}
+            {% endblock %}
+        </title>
+        {% block css_block %}
+        {% endblock %}
+    </head>
+
+    <body>
+        <div>
+            <ul>
+                <li><a href="{% url 'Recipes:home' %}">Home</a></li>
+                <li><a href="{% url 'Recipes:recipes' %}">Recipes</a></li>
+                <li><a href="{% url 'Recipes:search' %}">Search</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'Recipes:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'Recipes:login' %}">Log In</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+
+    </body>
+</html>

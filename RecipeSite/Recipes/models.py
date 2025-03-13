@@ -99,3 +99,6 @@ class Reviews(models.Model):
 
     def __str__(self):
         return self.comment
+    
+    class Meta:
+        unique_together = ('user', 'recipe')
