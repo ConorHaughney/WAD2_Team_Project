@@ -37,6 +37,10 @@ class Difficulty(models.Model):
     def __str__(self):
         return self.difficulty
     
+    class Meta:
+        verbose_name_plural = 'Difficulties'
+
+    
 
 
 class Recipe(models.Model):
@@ -70,10 +74,13 @@ class Ingredients(models.Model):
 
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient_name = models.CharField(max_length=INGREDIENT_NAME_MAX_LENGTH)
-    quantity = models.DecimalField(max_digits=4, decimal_places=2)
+    quantity = models.DecimalField(max_digits=5, decimal_places=1)
 
     def __str__(self):
         return self.ingredient_name
+    
+    class Meta:
+        verbose_name_plural = 'Ingredients'
     
     
 
@@ -87,6 +94,7 @@ class Favourites(models.Model):
     
     class Meta:
         unique_together = ('user', 'recipe')
+        verbose_name_plural = 'Favourites'
     
 
 
@@ -102,3 +110,4 @@ class Reviews(models.Model):
     
     class Meta:
         unique_together = ('user', 'recipe')
+        verbose_name_plural = 'Reviews'
