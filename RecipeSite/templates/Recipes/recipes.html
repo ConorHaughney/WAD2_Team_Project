@@ -30,4 +30,19 @@
         </a>
     </div>
 </div>  
+
+{% if search_query %}
+    <h2>Search Results for "{{ search_query }}"</h2>
+    {% if recipes %}
+        {% for recipe in recipes %}
+            <div class="recipe-card">
+                <h3>{{ recipe.recipe_name }}</h3>
+                <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No recipes found for "{{ search_query }}". Have you spelled the recipe correctly? Here are some of our favourite recipes for inspiration</p>
+    {% endif %}
+{% endif %}
+
 {% endblock %}

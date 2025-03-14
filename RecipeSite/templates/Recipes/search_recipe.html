@@ -1,8 +1,24 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
     Search Recipe
 {% endblock %}
-{% block body_block %}
 
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/searchRecipe.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+    <div class="form-container">
+        <div class="form-box">
+            <h1>Search Recipe</h1>
+            <form method="get" action="{% url 'Recipes:recipes' %}">
+                <input type="text" name="search" placeholder="Search Recipe">
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
