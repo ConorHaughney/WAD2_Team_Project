@@ -15,9 +15,17 @@ def home(request):
 
 # Recipe list page
 def recipes(request):
-    recipes = Recipe.objects.all().order_by('-created_at')
-    return render(request, 'Recipes/recipes.html', {'Recipes': recipes})
-
+    context_dict = {}
+    search_query = request.GET.get('search', '')
+     
+    if search_query:
+        recipes = Recipe.objects.filter(recipe_name__icontains=search_query)
+        context_dict['recipes'] = recipes
+        context_dict['search_query'] = search_query
+    else:
+        context_dict['recipes'] = Recipe.objects.all()
+     
+    return render(request, 'Recipes/recipes.html', context=context_dict)
 
 def create_account(request):
     registered = False
