@@ -6,6 +6,7 @@
     background-color: #404040;
     position: fixed;
     width: 100%;
+    padding-bottom: 100px;
   }
   
   .header-image {

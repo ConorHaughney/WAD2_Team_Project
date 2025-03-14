@@ -15,8 +15,43 @@ def home(request):
 
 # Recipe list page
 def recipes(request):
-    recipes = Recipe.objects.all().order_by('-created_at')
-    return render(request, 'Recipes/recipes.html', {'Recipes': recipes})
+    context_dict = {}
+    search_query = request.GET.get('search', '')
+    
+    if search_query:
+        recipes = Recipe.objects.filter(recipe_name__icontains=search_query)
+        context_dict['recipes'] = recipes
+        context_dict['search_query'] = search_query
+    else:
+        context_dict['recipes'] = Recipe.objects.all()
+    
+    return render(request, 'Recipes/recipes.html', context=context_dict)
+
+
+
+def search(request):
+    context_dict = {}
+    return render(request, 'Recipes/search_recipe.html', context=context_dict)
+
+
+
+def show_recipe(request, recipe_name_slug):
+    context_dict = {}
+
+    try:
+        recipe = Recipe.objects.get(slug=recipe_name_slug)
+
+        context_dict['recipe'] = recipe
+    except Recipe.DoesNotExist:
+        context_dict['pages'] = None
+        context_dict['category'] = None    
+    return render(request, 'Recipes/show_recipe.html', context=context_dict)
+
+
+
+def add_recipe(request):
+    context_dict = {}
+    return render(request, 'Recipes/add_recipe.html', context=context_dict)
 
 
 def create_account(request):
