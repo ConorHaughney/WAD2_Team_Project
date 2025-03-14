@@ -65,21 +65,19 @@ body, html {
   .form-group img {
     display: none;
     max-width: 150px;
-    max-height: 70px;
+    max-height: 50px;
     margin-left: 10px;
   }
 
   .picture-input-wrapper {
     display: flex;
     align-items: center;
-    display: flex;
-    align-items: center;
   }
 
   #preview {
     display: none;
-    max-width: 150px;
-    max-height: 100px;
+    max-width: 100px;
+    max-height: 50px;
     margin-left: 10px;
   }
 
