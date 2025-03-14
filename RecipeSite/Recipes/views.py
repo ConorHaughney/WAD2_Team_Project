@@ -152,7 +152,8 @@ def most_popular(request):
 # User's favourite recipes
 @login_required
 def favourites(request):
-    favourite_recipes = Recipe.objects.filter(favourites__user=request.user.userprofile)
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+    favourite_recipes = Recipe.objects.filter(favourites__user=user_profile)    
     context_dict = {'Recipes': favourite_recipes}
     return render(request, 'Recipes/your_favourites.html', context_dict)
 

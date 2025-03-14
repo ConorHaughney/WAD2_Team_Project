@@ -1,9 +1,10 @@
 body {
   margin: 0;
   padding: 0;
+  padding-top: 50px;
 }
 
-ul {
+.main-header ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -21,24 +22,21 @@ ul {
     align-items: center;
   }
   
-  li {
+  .main-header li {
     margin: 0;
     padding: 0;
   }
   
-  li a {
+  .main-header li a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 25px;
+    font-family: Arial, sans-serif !important;
   }
   
-  li a:hover {
+  .main-header li a:hover {
     background-color: #111;
-  }
-
-  body {
-    padding-top: 50px;
   }
