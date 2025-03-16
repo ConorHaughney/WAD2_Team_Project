@@ -11,28 +11,38 @@ html {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 0;
     background-color: #404040;
     position: fixed;
+    top: 43px;  /* Adjusted to match main nav height */
+    left: 0;
     width: 100%;
-    padding-bottom: 100px;
-  }
-  
-  .header-image {
+    z-index: 999;
+    padding: 20px 0;  /* Increased vertical padding */
+    height: 120px;  /* Added explicit height */
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#content-wrapper {
+    margin-top: 200px;
+    padding: 20px;
+}
+
+.header-image {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
-  .header-image a {
+.header-image a {
     text-decoration: none;
     color: white;
     text-align: center;
 
-  }
-  
-  .caption {
+}
+
+.caption {
     margin-top: 8px;
     font-size: 20px;
     font-weight: bold;
-  }
+}
