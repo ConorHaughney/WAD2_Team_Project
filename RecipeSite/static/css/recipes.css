@@ -13,12 +13,12 @@ html {
     align-items: center;
     background-color: #404040;
     position: fixed;
-    top: 43px;  /* Adjusted to match main nav height */
+    top: 43px;
     left: 0;
     width: 100%;
     z-index: 999;
-    padding: 20px 0;  /* Increased vertical padding */
-    height: 120px;  /* Added explicit height */
+    padding: 20px 0;
+    height: 120px; 
     margin: 0;
     box-sizing: border-box;
 }
