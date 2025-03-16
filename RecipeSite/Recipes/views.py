@@ -22,8 +22,10 @@ def recipes(request):
         recipes = Recipe.objects.filter(recipe_name__icontains=search_query)
         context_dict['recipes'] = recipes
         context_dict['search_query'] = search_query
+        if not recipes:
+            context_dict['all_recipes'] = Recipe.objects.all().order_by('recipe_name')
     else:
-        context_dict['recipes'] = Recipe.objects.all()
+        context_dict['recipes'] = Recipe.objects.all().order_by('recipe_name')
      
     return render(request, 'Recipes/recipes.html', context=context_dict)
 
