@@ -1,8 +1,44 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
     Most Popular
 {% endblock %}
-{% block body_block %}
 
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mostPopular.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="header2">
+    <h1>Most Popular Recipes</h1>
+</div>
+
+<div class="content-wrapper">
+    {% if Recipes %}
+        <div class="recipe-grid">
+            {% for recipe in Recipes %}
+                <div class="recipe-card">
+                    <div class="recipe-image">
+                        <img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}">
+                    </div>
+                    <div class="recipe-info">
+                        <h2>{{ recipe.recipe_name }}</h2>
+                        <div class="rating">
+                            <span>Average Rating: {{ recipe.avg_rating|floatformat:1 }} / 5</span>
+                        </div>
+                        <p>Cuisine: {{ recipe.cuisine }}</p>
+                        <p>Time: {{ recipe.time_taken }} minutes</p>
+                        <a href="{% url 'Recipes:show_recipe' recipe.slug %}" class="view-recipe-btn">View Recipe</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-recipes">
+            <p>No recipes found. Be the first to add and rate a recipe!</p>
+            <a href="{% url 'Recipes:add_recipe' %}" class="add-recipe-btn">Add Recipe</a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

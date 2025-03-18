@@ -68,9 +68,9 @@ def create_account(request):
     })
 
 #  Page where users can comment and rate
-def show_recipe(request, recipe_slug):
+def show_recipe(request, recipe_name_slug):
     try:
-        recipe = Recipe.objects.get(slug=recipe_slug)
+        recipe = Recipe.objects.get(slug=recipe_name_slug)
     except Recipe.DoesNotExist:
         return HttpResponse("Recipe not found", status=404)
 
