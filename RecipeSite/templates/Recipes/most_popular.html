@@ -25,7 +25,11 @@
                     <div class="recipe-info">
                         <h2>{{ recipe.recipe_name }}</h2>
                         <div class="rating">
-                            <span>Average Rating: {{ recipe.avg_rating|floatformat:1 }} / 5</span>
+                            {% if recipe.avg_rating %}
+                                <span>Average Rating: {{ recipe.avg_rating|floatformat:1 }} / 5</span>
+                            {% else %}
+                                <span>No ratings yet</span>
+                        {% endif %}
                         </div>
                         <p>Cuisine: {{ recipe.cuisine }}</p>
                         <p>Time: {{ recipe.time_taken }} minutes</p>
