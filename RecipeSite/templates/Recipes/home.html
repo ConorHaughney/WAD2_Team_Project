@@ -11,23 +11,56 @@
 
 {% block body_block %}
 <div class="container">
-    <div class="form-container">
-        <div class="form-box">
-            
-            <h1>Recipe Explore</h1>
+    <div>
+        <div class="intro">
+            <br><br>
+            {% if user.is_authenticated %}
+            <h1>Welcome, {{ user.username }}!</h1>
+            {% else %}
+            <h1>Welcome!</h1>
+            {% endif %}
+        </div>
 
-            <p>The most comprehensive food website</p>
-            <p>Expect your participation</p>
+        <div class="info">
+            Check out all of our recipes here!
             <br>
-            <div class="signin-button">
-                <a href="{% url 'Recipes:login' %}" class="btn">Sign In</a>
-                <a href="{% url 'Recipes:create_account' %}" class="btn">Create Account</a>
+            Feeling creative? 
+            Add your own recipe for others to see!
+        </div>
+
+        <div class="login">
+            {% if user.is_authenticated %}
+            {% else %}
+            <div class="form-box">
+                <div class="signin-button">
+                    <a href="{% url 'Recipes:login' %}" class="btn">Sign In</a>
+                    <a href="{% url 'Recipes:create_account' %}" class="btn">Create Account</a>
+                </div>
             </div>
+            {% endif %}
         </div>
     </div>
 
-    <div class="image-container">
-        <img src="{% static 'images/HomeFood.jpg' %}" alt="Picture of ingredients">
+    <div class="recipe-container">
+        <div class="popular-recipe">
+            {% if popular_recipe %}
+            <a href="{% url 'Recipes:show_recipe' popular_recipe.slug %}">
+                <img src="{{ popular_recipe.picture.url }}" alt="{{ popular_recipe.recipe_name }}" />
+            </a>
+            {% else %}
+            <p>No popular recipe available.</p>
+            {% endif %}
+        </div>
+
+        <div class="random-recipe">
+            {% if random_recipe %}
+            <a href="{% url 'Recipes:show_recipe' random_recipe.slug %}">
+                <img src="{{ random_recipe.picture.url }}" alt="{{ random_recipe.recipe_name }}" />
+            </a>
+            {% else %}
+            <p>No random recipe available.</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}

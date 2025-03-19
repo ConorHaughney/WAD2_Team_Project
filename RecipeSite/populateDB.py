@@ -5,7 +5,7 @@ from decimal import Decimal
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'RecipeSite.settings')
 django.setup()
 
-from Recipes.models import Cuisine, Difficulty, Recipe, Ingredients, UserProfile
+from Recipes.models import Cuisine, Difficulty, Recipe, Ingredients, UserProfile, Reviews
 from django.contrib.auth.models import User
 
 def populate():
@@ -25,6 +25,15 @@ def populate():
         user.set_password('password')
         user.save()
     author, created = UserProfile.objects.get_or_create(user=user)
+
+    reviewer, created = User.objects.get_or_create(
+        username='reviewer',
+        defaults={'email': 'reviewer@example.com'}
+    )
+    if created:
+        reviewer.set_password('password')
+        reviewer.save()
+    reviewer_profile, created = UserProfile.objects.get_or_create(user=reviewer)
     
     recipes = [
         {
@@ -34,7 +43,7 @@ def populate():
             'time_taken': 30,
             'instructions': 'Boil pasta. Mix eggs and cheese. Combine with pancetta.',
             'portion': 4,
-            'picture': 'recipe_images/default.jpg'
+            'picture': 'recipe_images/spaghetti_carbonara.jpg'
         },
         {
             'recipe_name': 'Kung Pao Chicken',
@@ -43,7 +52,7 @@ def populate():
             'time_taken': 45,
             'instructions': 'Stir-fry chicken. Add peanuts, chili peppers, sauce, and vegetables.',
             'portion': 4,
-            'picture': 'recipe_images/default.jpg'
+            'picture': 'recipe_images/kung_pao_chicken.jpg'
         },
         {
             'recipe_name': 'Tacos',
@@ -52,7 +61,7 @@ def populate():
             'time_taken': 20,
             'instructions': 'Prepare meat, salsa, and tortillas. Assemble tacos.',
             'portion': 4,
-            'picture': 'recipe_images/default.jpg'
+            'picture': 'recipe_images/tacos.jpg'
         },
         {
             'recipe_name': 'Ratatouille',
@@ -61,7 +70,7 @@ def populate():
             'time_taken': 60,
             'instructions': 'Layer sliced vegetables. Bake with herbs.',
             'portion': 4,
-            'picture': 'recipe_images/default.jpg'
+            'picture': 'recipe_images/ratatouille.jpg'
         },
         {
             'recipe_name': 'Sushi',
@@ -70,7 +79,7 @@ def populate():
             'time_taken': 90,
             'instructions': 'Prepare rice, slice fish, and roll sushi.',
             'portion': 4,
-            'picture': 'recipe_images/default.jpg'
+            'picture': 'recipe_images/sushi.jpg'
         }
     ]
     
@@ -106,6 +115,24 @@ def populate():
             {'ingredient_name': 'Soy Sauce', 'quantity': Decimal('20.0')}
         ]
     }
+
+    reviews = {
+        'Spaghetti Carbonara': [
+            {'rating': 4, 'comment': 'Delicious and creamy.'}
+        ],
+        'Kung Pao Chicken': [
+            {'rating': 3, 'comment': 'Good, but too spicy for my taste.'}
+        ],
+        'Tacos': [
+            {'rating': 5, 'comment': 'Amazing tacos, loved every bite!'}
+        ],
+        'Ratatouille': [
+            {'rating': 4, 'comment': 'Fresh, tasty, and well balanced.'}
+        ],
+        'Sushi': [
+            {'rating': 5, 'comment': 'Best sushi I have ever had!'}
+        ]
+    }
     
     for r in recipes:
         cuisine = Cuisine.objects.get(name=r['cuisine'])
@@ -127,6 +154,15 @@ def populate():
                     recipe=recipe_instance,
                     ingredient_name=ing['ingredient_name'],
                     quantity=ing['quantity']
+                )
+
+        if r['recipe_name'] in reviews:
+            for rev in reviews[r['recipe_name']]:
+                Reviews.objects.get_or_create(
+                    user=reviewer_profile,
+                    recipe=recipe_instance,
+                    rating=rev['rating'],
+                    comment=rev['comment']
                 )
 
 if __name__ == '__main__':

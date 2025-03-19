@@ -7,10 +7,13 @@ from django.urls import reverse
 from Recipes.forms import RecipeForm, ReviewForm, UserForm, UserProfileForm
 from Recipes.models import Recipe, Favourites, Reviews, UserProfile
 
-# Home page showing top 5 most popular recipes
+# Home page showing most popular recipes
 def home(request):
-    recipes = Recipe.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')[:5]
-    context_dict = {'Recipes': recipes}
+    popular_recipe = Recipe.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating').first()
+    random_recipe = Recipe.objects.order_by('?').first()
+    context_dict = {'popular_recipe': popular_recipe,
+                    'random_recipe': random_recipe}
+    
     return render(request, 'Recipes/home.html', context_dict)
 
 # Recipe list page
@@ -74,8 +77,8 @@ def show_recipe(request, recipe_slug):
     except Recipe.DoesNotExist:
         return HttpResponse("Recipe not found", status=404)
 
-    comments = recipe.reviews.all()
-    avg_rating = recipe.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    comments = recipe.reviews_set.all()
+    avg_rating = recipe.reviews_set.aggregate(Avg('rating'))['rating__avg'] or 0
     rating_form = ReviewForm()
     comment_form = ReviewForm()
 
