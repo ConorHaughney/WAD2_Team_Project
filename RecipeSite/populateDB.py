@@ -41,7 +41,14 @@ def populate():
             'cuisine': 'Italian',
             'difficulty': 'Medium',
             'time_taken': 30,
-            'instructions': 'Boil pasta. Mix eggs and cheese. Combine with pancetta.',
+            'instructions': ("Bring a large pot of salted water to a boil and cook spaghetti until al dente. "
+                "Meanwhile, in a bowl, whisk together eggs, grated Parmesan, a pinch of salt, and plenty of black pepper. "
+                "In a separate pan, fry diced pancetta until crispy. "
+                "Once the pasta is cooked, reserve a cup of pasta water and drain the pasta. "
+                "Add the hot pasta to the pan with pancetta and remove the pan from heat. "
+                "Quickly stir in the egg mixture, tossing vigorously so the residual heat gently cooks the eggs into a creamy sauce. "
+                "Adjust the sauce consistency with reserved pasta water if needed. "
+                "Serve immediately with an extra sprinkle of Parmesan and freshly ground pepper."),
             'portion': 4,
             'picture': 'recipe_images/spaghetti_carbonara.jpg'
         },
@@ -50,7 +57,12 @@ def populate():
             'cuisine': 'Chinese',
             'difficulty': 'Hard',
             'time_taken': 45,
-            'instructions': 'Stir-fry chicken. Add peanuts, chili peppers, sauce, and vegetables.',
+            'instructions': ("Cut chicken into bite-size pieces and marinate briefly with soy sauce and cornstarch. "
+                "Heat oil in a wok over high heat and stir-fry the chicken until it starts to brown. "
+                "Add diced bell peppers, dried chili peppers, and chopped garlic and ginger. "
+                "Stir in a sauce made from soy sauce, vinegar, sugar, and a splash of water. "
+                "Toss in roasted peanuts at the end and stir-fry for another minute. "
+                "Adjust seasoning if needed and serve hot over steamed rice."),
             'portion': 4,
             'picture': 'recipe_images/kung_pao_chicken.jpg'
         },
@@ -59,7 +71,12 @@ def populate():
             'cuisine': 'Mexican',
             'difficulty': 'Easy',
             'time_taken': 20,
-            'instructions': 'Prepare meat, salsa, and tortillas. Assemble tacos.',
+            'instructions': ("Season ground beef with cumin, chili powder, and garlic. "
+                "Sauté the beef until fully browned and set aside. "
+                "Warm tortillas on a skillet. "
+                "Prepare toppings such as diced tomatoes, shredded lettuce, cheese, and salsa. "
+                "Assemble tacos by layering the beef and your preferred toppings on each tortilla. "
+                "Finish with a squeeze of lime and enjoy immediately."),
             'portion': 4,
             'picture': 'recipe_images/tacos.jpg'
         },
@@ -68,7 +85,12 @@ def populate():
             'cuisine': 'French',
             'difficulty': 'Medium',
             'time_taken': 60,
-            'instructions': 'Layer sliced vegetables. Bake with herbs.',
+            'instructions': ("Preheat your oven to 375°F (190°C). "
+                "Slice zucchini, eggplant, bell peppers, and tomatoes into uniform rounds. "
+                "Spread a thin layer of tomato sauce on a baking dish and arrange the vegetable slices in a concentric pattern, alternating colors. "
+                "Drizzle olive oil over the vegetables and season with salt, pepper, and herbs de Provence. "
+                "Cover with foil and bake for 30 minutes, then remove the foil and bake for an additional 15 minutes until the vegetables are tender. "
+                "Garnish with fresh basil before serving."),
             'portion': 4,
             'picture': 'recipe_images/ratatouille.jpg'
         },
@@ -77,7 +99,12 @@ def populate():
             'cuisine': 'Japanese',
             'difficulty': 'Hard',
             'time_taken': 90,
-            'instructions': 'Prepare rice, slice fish, and roll sushi.',
+            'instructions': ("Rinse sushi rice under cold water until the water runs clear, then cook according to package instructions. "
+                "Mix rice vinegar, sugar, and salt in a small saucepan and heat until dissolved; gently fold this seasoning into the warm rice. "
+                "Lay a sheet of nori on a bamboo mat, spread an even layer of seasoned rice over the nori, leaving a small margin at the top. "
+                "Place slices of fresh fish and vegetables (such as cucumber or avocado) along the bottom edge. "
+                "Roll tightly using the bamboo mat, then slice into bite-sized pieces. "
+                "Serve with soy sauce, wasabi, and pickled ginger."),
             'portion': 4,
             'picture': 'recipe_images/sushi.jpg'
         }
