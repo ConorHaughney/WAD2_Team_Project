@@ -71,9 +71,9 @@ def create_account(request):
     })
 
 #  Page where users can comment and rate
-def show_recipe(request, recipe_slug):
+def show_recipe(request, recipe_name_slug):
     try:
-        recipe = Recipe.objects.get(slug=recipe_slug)
+        recipe = Recipe.objects.get(slug=recipe_name_slug)
     except Recipe.DoesNotExist:
         return HttpResponse("Recipe not found", status=404)
 
@@ -151,6 +151,7 @@ def user_logout(request):
 # Most popular recipes page
 def most_popular(request):
     recipes = Recipe.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')[:10]
+            
     context_dict = {'Recipes': recipes}
     return render(request, 'Recipes/most_popular.html', context_dict)
 

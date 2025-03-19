@@ -13,18 +13,18 @@ html {
     align-items: center;
     background-color: #404040;
     position: fixed;
-    top: 43px;
+    top: 55px;
     left: 0;
     width: 100%;
     z-index: 999;
-    padding: 20px 0;
-    height: 120px; 
+    padding: 15px 20px;  
+    height: 140px;  
     margin: 0;
     box-sizing: border-box;
 }
 
 #content-wrapper {
-    margin-top: 200px;
+    margin-top: 150px;
     padding: 20px;
 }
 

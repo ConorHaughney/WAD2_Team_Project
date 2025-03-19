@@ -1,4 +1,5 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
     {% if recipe %}
@@ -7,11 +8,49 @@
         Unknown Recipe
     {% endif %}
 {% endblock %}
+
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/showRecipe.css' %}">
+{% endblock %}
+
 {% block body_block %}
 {% if recipe %}
+    <div class="recipe-container">
+        <div class="recipe-header">
+            <h1>{{ recipe.recipe_name }}</h1>
+            <div class="recipe-meta">
+                <p>Cuisine: {{ recipe.cuisine }}</p>
+                <p>Difficulty: {{ recipe.difficulty }}</p>
+                <p>Time: {{ recipe.time_taken }} minutes</p>
+                <p>Portions: {{ recipe.portion }}</p>
+                <p>Author: {{ recipe.author }}</p>
+            </div>
+        </div>
 
+        <div class="recipe-content">
+            <div class="recipe-image">
+                <img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}">
+            </div>
+
+            <div class="recipe-instructions">
+                <h2>Instructions</h2>
+                <p>{{ recipe.instructions }}</p>
+            </div>
+
+            <div class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <ul>
+                {% for ingredient in recipe.ingredients_set.all %}
+                    <li>{{ ingredient.ingredient_name }}: {{ ingredient.quantity }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% else %}
-<br>
-This recipe does not exist, why not <a href="{% url 'Recipes:add_recipe' %}">add your own!</a>
+    <div class="no-recipe">
+        <p>This recipe does not exist.</p>
+        <a href="{% url 'Recipes:add_recipe' %}" class="btn">Add your own!</a>
+    </div>
 {% endif %}
 {% endblock %}
