@@ -85,34 +85,34 @@ def populate():
     
     recipe_ingredients = {
         'Spaghetti Carbonara': [
-            {'ingredient_name': 'Spaghetti', 'quantity': Decimal('200.0')},
-            {'ingredient_name': 'Eggs', 'quantity': Decimal('2.0')},
-            {'ingredient_name': 'Pancetta', 'quantity': Decimal('100.0')},
-            {'ingredient_name': 'Parmesan', 'quantity': Decimal('50.0')}
+            {'ingredient_name': 'Spaghetti', 'quantity': Decimal('200')},
+            {'ingredient_name': 'Eggs', 'quantity': Decimal('2')},
+            {'ingredient_name': 'Pancetta', 'quantity': Decimal('100')},
+            {'ingredient_name': 'Parmesan', 'quantity': Decimal('50')}
         ],
         'Kung Pao Chicken': [
-            {'ingredient_name': 'Chicken', 'quantity': Decimal('300.0')},
-            {'ingredient_name': 'Peanuts', 'quantity': Decimal('50.0')},
-            {'ingredient_name': 'Chili Peppers', 'quantity': Decimal('10.0')},
-            {'ingredient_name': 'Sauce', 'quantity': Decimal('30.0')}
+            {'ingredient_name': 'Chicken', 'quantity': Decimal('300')},
+            {'ingredient_name': 'Peanuts', 'quantity': Decimal('50')},
+            {'ingredient_name': 'Chili Peppers', 'quantity': Decimal('10')},
+            {'ingredient_name': 'Sauce', 'quantity': Decimal('30')}
         ],
         'Tacos': [
-            {'ingredient_name': 'Tortillas', 'quantity': Decimal('4.0')},
-            {'ingredient_name': 'Beef', 'quantity': Decimal('200.0')},
-            {'ingredient_name': 'Lettuce', 'quantity': Decimal('50.0')},
-            {'ingredient_name': 'Cheese', 'quantity': Decimal('30.0')}
+            {'ingredient_name': 'Tortillas', 'quantity': Decimal('4')},
+            {'ingredient_name': 'Beef', 'quantity': Decimal('200')},
+            {'ingredient_name': 'Lettuce', 'quantity': Decimal('50')},
+            {'ingredient_name': 'Cheese', 'quantity': Decimal('30')}
         ],
         'Ratatouille': [
-            {'ingredient_name': 'Zucchini', 'quantity': Decimal('100.0')},
-            {'ingredient_name': 'Eggplant', 'quantity': Decimal('100.0')},
-            {'ingredient_name': 'Bell Pepper', 'quantity': Decimal('50.0')},
-            {'ingredient_name': 'Tomato', 'quantity': Decimal('100.0')}
+            {'ingredient_name': 'Zucchini', 'quantity': Decimal('100')},
+            {'ingredient_name': 'Eggplant', 'quantity': Decimal('100')},
+            {'ingredient_name': 'Bell Pepper', 'quantity': Decimal('50')},
+            {'ingredient_name': 'Tomato', 'quantity': Decimal('100')}
         ],
         'Sushi': [
-            {'ingredient_name': 'Rice', 'quantity': Decimal('200.0')},
-            {'ingredient_name': 'Fish', 'quantity': Decimal('150.0')},
-            {'ingredient_name': 'Seaweed', 'quantity': Decimal('10.0')},
-            {'ingredient_name': 'Soy Sauce', 'quantity': Decimal('20.0')}
+            {'ingredient_name': 'Rice', 'quantity': Decimal('200')},
+            {'ingredient_name': 'Fish', 'quantity': Decimal('150')},
+            {'ingredient_name': 'Seaweed', 'quantity': Decimal('10')},
+            {'ingredient_name': 'Soy Sauce', 'quantity': Decimal('20')}
         ]
     }
 

@@ -74,7 +74,7 @@ class Ingredients(models.Model):
 
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient_name = models.CharField(max_length=INGREDIENT_NAME_MAX_LENGTH)
-    quantity = models.DecimalField(max_digits=5, decimal_places=1)
+    quantity = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10000)])
 
     def __str__(self):
         return self.ingredient_name

@@ -22,10 +22,10 @@
         </div>
 
         <div class="info">
-            Check out all of our recipes here!
-            <br>
-            Feeling creative? 
-            Add your own recipe for others to see!
+            Check out all of our recipes <a href="{% url 'Recipes:recipes' %}">here!</a>
+            <br><br>
+            Feeling creative?<br>
+            <a href="{% url 'Recipes:add_recipe' %}">Add your own</a> recipe for others to see!
         </div>
 
         <div class="login">
@@ -45,7 +45,8 @@
         <div class="popular-recipe">
             {% if popular_recipe %}
             <a href="{% url 'Recipes:show_recipe' popular_recipe.slug %}">
-                <img src="{{ popular_recipe.picture.url }}" alt="{{ popular_recipe.recipe_name }}" />
+                <img src="{{ popular_recipe.picture.url }}" alt="{{ popular_recipe.recipe_name }}" height="200", width="300"/><br>
+                <p>Check out our most popular recipe.</p>
             </a>
             {% else %}
             <p>No popular recipe available.</p>
@@ -55,7 +56,8 @@
         <div class="random-recipe">
             {% if random_recipe %}
             <a href="{% url 'Recipes:show_recipe' random_recipe.slug %}">
-                <img src="{{ random_recipe.picture.url }}" alt="{{ random_recipe.recipe_name }}" />
+                <img src="{{ random_recipe.picture.url }}" alt="{{ random_recipe.recipe_name }}" height="200", width="300"/><br>
+                <p>Or why not check out this random recipe.</p>
             </a>
             {% else %}
             <p>No random recipe available.</p>

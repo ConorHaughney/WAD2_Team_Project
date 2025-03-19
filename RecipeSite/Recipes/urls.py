@@ -14,7 +14,7 @@ urlpatterns = [
     path('recipes/most_popular/', views.most_popular, name='most_popular'),
     path('recipes/your-favourites/', views.favourites, name='favourites'),
     path('recipes/add-your-own/', views.add_recipe, name='add_recipe'),
-    path('recipes/<slug:recipe_slug>/',
+    path('recipes/<slug:recipe_name_slug>/',
          views.show_recipe, name='show_recipe'),
     
 ]

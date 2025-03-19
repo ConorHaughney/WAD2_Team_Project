@@ -10,7 +10,9 @@ from Recipes.models import Recipe, Favourites, Reviews, UserProfile
 # Home page showing most popular recipes
 def home(request):
     popular_recipe = Recipe.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating').first()
-    random_recipe = Recipe.objects.order_by('?').first()
+    random_recipe = popular_recipe
+    while random_recipe == popular_recipe:
+        random_recipe = Recipe.objects.order_by('?').first()
     context_dict = {'popular_recipe': popular_recipe,
                     'random_recipe': random_recipe}
     
@@ -102,7 +104,7 @@ def show_recipe(request, recipe_name_slug):
                 return redirect('Recipes:show_recipe', recipe_slug=recipe.slug)
 
     context = {
-        'Recipe': recipe,
+        'recipe': recipe,
         'comments': comments,
         'avg_rating': avg_rating,
         'rating_form': rating_form,
