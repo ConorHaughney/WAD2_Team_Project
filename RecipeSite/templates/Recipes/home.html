@@ -11,23 +11,73 @@
 
 {% block body_block %}
 <div class="container">
-    <div class="form-container">
-        <div class="form-box">
-            
-            <h1>Recipe Explore</h1>
+    <div class="left-side">
+        <div class="text">
+            <div class="intro">
+                {% if user.is_authenticated %}
+                <h1>Welcome, {{ user.username }}!</h1>
+                {% else %}
+                <h1>Welcome!</h1>
+                {% endif %}
+            </div>
 
-            <p>The most comprehensive food website</p>
-            <p>Expect your participation</p>
-            <br>
-            <div class="signin-button">
-                <a href="{% url 'Recipes:login' %}" class="btn">Sign In</a>
-                <a href="{% url 'Recipes:create_account' %}" class="btn">Create Account</a>
+            <div class="info">
+                <h2>Explore the Best Recipes from Around the World</h2>
+                <p>Your ultimate online cookbook—where food lovers unite!</p>
+
+                <p>Welcome to the best online recipe collection! Whether you're an aspiring home cook, a seasoned chef, <br>or just someone who loves food, you've come to the right place.</p>
+
+                <ul>
+                    <li>🌍 Explore authentic recipes from different cultures.</li>
+                    <li>👨‍🍳 Learn new cooking techniques and tips.</li>
+                    <li>🍽️ Share your own creations with a passionate community.</li>
+                </ul>
+            </div>
+        
+            <div class="poll-container" style="transform: scale(0.8); transform-origin: top; margin: 5px auto;">
+                <script src="https://static.elfsight.com/platform/platform.js" async></script>
+                <div class="elfsight-app-6135ec1e-788e-4439-833b-e3b78168af3d" data-elfsight-app-lazy></div>
             </div>
         </div>
     </div>
 
-    <div class="image-container">
-        <img src="{% static 'images/HomeFood.jpg' %}" alt="Picture of ingredients">
+    <div class="recipe-container">
+        <br><br>
+        <div class="popular-recipe">
+            {% if popular_recipe %}
+            <a href="{% url 'Recipes:show_recipe' popular_recipe.slug %}">
+                <img src="{{ popular_recipe.picture.url }}" alt="{{ popular_recipe.recipe_name }}" height="200", width="300"/><br>
+                <p>Check out our most popular recipe.</p>
+            </a>
+            {% else %}
+            <p>No popular recipe available.</p>
+            {% endif %}
+        </div>
+
+        <div class="random-recipe">
+            {% if random_recipe %}
+            <a href="{% url 'Recipes:show_recipe' random_recipe.slug %}">
+                <img src="{{ random_recipe.picture.url }}" alt="{{ random_recipe.recipe_name }}" height="200", width="300"/><br>
+                <p>Or why not check out this random recipe.</p>
+            </a>
+            {% else %}
+            <p>No random recipe available.</p>
+            {% endif %}
+        </div>
+
+        <div class="explore">
+            Check out all of our recipes <a href="{% url 'Recipes:recipes' %}">here!</a>
+            <br><br>
+            Feeling creative?<br>
+            <a href="{% url 'Recipes:add_recipe' %}">Add your own</a> recipe for others to see!
+        </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+});
+</script>
 {% endblock %}
