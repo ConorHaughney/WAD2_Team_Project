@@ -139,7 +139,7 @@ def add_recipe(request):
             recipe = form.save(commit=False)
             recipe.author = request.user.userprofile  
             recipe.save()
-            return redirect('Recipes:show_recipe', recipe_slug=recipe.slug)
+            return redirect('Recipes:show_recipe', recipe_name_slug=recipe.slug)
     else:
         form = RecipeForm()
     return render(request, 'Recipes/add_recipe.html', {'form': form})

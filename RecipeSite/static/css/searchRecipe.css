@@ -62,3 +62,7 @@ input[type="text"] {
     justify-content: center;
     margin: 0;
 }
+
+.btn:hover {
+    background-color: #c0392b;
+}
