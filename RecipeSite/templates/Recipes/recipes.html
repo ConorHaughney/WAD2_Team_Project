@@ -1,5 +1,5 @@
 {% extends 'Recipes/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 
 {% block title_block %}
@@ -31,4 +31,47 @@
         </a>
     </div>
 </div>  
+
+<br>
+<br>
+<br>
+
+<div id="content-wrapper">
+    {% if search_query %}
+        <h2>Search Results for "{{ search_query }}"</h2>
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.recipe_name }}</h3>
+                    <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>No recipes found for "{{ search_query }}". Showing all recipes instead:</h2>
+            {% if all_recipes %}
+                {% for recipe in all_recipes %}
+                    <div class="recipe-card">
+                        <h3>{{ recipe.recipe_name }}</h3>
+                        <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No recipes available yet. Be the first to add one!</p>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <h2>All Recipes</h2>
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.recipe_name }}</h3>
+                    <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No recipes available yet. Be the first to add one!</p>
+        {% endif %}
+    {% endif %}
+</div>
+
 {% endblock %}
