@@ -15,6 +15,7 @@
 
     <div class="form-container">
         <div class="form-box">
+            
             {% if user.is_authenticated %}
             <div class="authenticated">
                 Thank you for logging in!<br><br> 
@@ -38,6 +39,9 @@
                 <input type="password" id="password" name="password" />
             </div>
             <input type="submit" class="btn" value="Sign In" />
+            {% if login_error %}
+            <div class="error">{{ login_error }}</div>
+            {% endif %}
             </form>
 
 
