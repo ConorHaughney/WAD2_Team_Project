@@ -124,7 +124,8 @@ def user_login(request):
                 login(request, user)
                 return redirect('Recipes:home')
             else:
-                return HttpResponse("Your account is disabled.")
+                context = {'disabled_error': "Your account has been disabled"}
+                return render(request, 'Recipes/login.html', context)
         else:
             context = {'login_error': "Username or password incorrect"}
             return render(request, 'Recipes/login.html', context)
