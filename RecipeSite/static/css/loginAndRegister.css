@@ -1,11 +1,8 @@
-body,
-html {
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
+  }
 
   .authenticated {
     text-align: center;
@@ -21,6 +18,11 @@ html {
     font-weight: bold;
     margin-bottom: 20px;
   }
+
+  #password-match-message {
+    color: red;
+    font-size: 0.9em;
+  }
   
   .container {
     display: flex;
@@ -34,19 +36,27 @@ html {
     justify-content: center;
     background-color: #f5f5f5;
     font-family: Arial, sans-serif;
+    padding-top: 75px;
   }
   
-  .form-box {
+  .register-form-box {
     width: 90%;
     max-width: 400px;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
   }
 
-  .error {
-    color: #e74c3c;
+  .login-form-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
   }
   
   .form-group {

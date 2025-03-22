@@ -7,15 +7,17 @@
 {% block body_block %}
 
 {% block css_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
-{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/loginAndRegister.css' %}">
+    <script src="{% static 'javascript/register.js' %}" defer></script>
+    {% endblock %}
 
 
 
 <div class="container">
     <div class="form-container">
-        <div class="form-box">
+        <div class="register-form-box">
             {% if user.is_authenticated %}
+            <!-- user already logged in, display message and redirect links -->
             <div class="authenticated">
                 Thank you for logging in!<br><br> 
                 Why not <a href="{% url 'Recipes:recipes' %}">check out some recipes?</a>
@@ -23,13 +25,16 @@
                 <br>
                 <a href="{% url 'Recipes:home' %}">Return to the homepage.</a><br />
             </div>
+            
             {% elif registered %}
+            <!-- user just created account, display message and redirect links -->
             <div class="authenticated">
                 Registration successful!
                 <br><br> 
                 <a href="{% url 'Recipes:login' %}" class="btn">Log In</a>
             </div>
             {% else %}
+            <!-- user not logged in and hasnt created account -->
             <div class="title">
             Register here!<br />
             </div>
@@ -38,26 +43,32 @@
 
                 {% csrf_token %}
 
+                <!-- username input -->
                 <div class="form-group">
                     <label for="id_username">Username:</label>
                     {{ user_form.username }}
                 </div>
+
+                <!-- email input -->
                 <div class="form-group">
                     <label for="id_email">Email:</label>
                     {{ user_form.email }}
                 </div>
 
+                <!-- password input -->
                 <div class="form-group password-group">
                     <label for="id_password">Password:</label>
                     <input type="password" id="id_password" name="password" />
                 </div>
-                
+
+                <!-- confirm password input -->
                 <div class="form-group password-group">
                     <label for="id_confirm_password">Confirm Password:</label>
                     <input type="password" id="id_confirm_password" name="confirm_password" />
-                    <span id="password-match-message" style="color: red; font-size: 0.9em;"></span>
+                    <span id="password-match-message"></span>
                 </div>
                 
+                <!-- optional profile picture input -->
                 <div class="form-group">
                     <label for="id_picture">Profile Picture:</label>
                     <div class="picture-input-wrapper">
@@ -66,6 +77,7 @@
                     </div>
                 </div>
                 
+                <!-- submit button -->
                 <input type="submit" name="submit" value="Register" class="btn" />
             </form>
 
@@ -78,48 +90,11 @@
         </div>
     </div>
 
+    <!-- static image for right side of page -->
     <div class="image-container">
         <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry">
     </div>
 
 </div>
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    document.getElementById("id_picture").addEventListener("change", function(event) {
-        var input = event.target;
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var preview = document.getElementById("preview");
-                preview.src = e.target.result;
-                preview.style.display = "block";
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    });
-
-
-    const passwordInput = document.getElementById("id_password");
-    const confirmPasswordInput = document.getElementById("id_confirm_password");
-    const messageSpan = document.getElementById("password-match-message");
-
-    function validatePasswordMatch() {
-        if (passwordInput.value && confirmPasswordInput.value && passwordInput.value !== confirmPasswordInput.value) {
-            messageSpan.textContent = "Passwords do not match";
-        } else {
-            messageSpan.textContent = "";
-        }
-    }
-
-    passwordInput.addEventListener("input", validatePasswordMatch);
-    confirmPasswordInput.addEventListener("input", validatePasswordMatch);
-});
-</script>
-
 {% endblock %}
 
