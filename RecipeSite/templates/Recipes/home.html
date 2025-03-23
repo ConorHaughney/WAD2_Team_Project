@@ -7,6 +7,7 @@
 
 {% block css_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<script src="{% static 'javascript/preventScroll.js' %}" defer></script>
 {% endblock %}
 
 {% block body_block %}
@@ -14,6 +15,7 @@
     <div class="left-side">
         <div class="text">
             <div class="intro">
+                <!-- display welcome message that differs based on username and if logged in -->
                 {% if user.is_authenticated %}
                 <h1>Welcome, {{ user.username }}!</h1>
                 {% else %}
@@ -22,6 +24,7 @@
             </div>
 
             <div class="info">
+                <!-- text description of the website -->
                 <h2>Explore the Best Recipes from Around the World</h2>
                 <p>Your ultimate online cookbook—where food lovers unite!</p>
 
@@ -33,17 +36,13 @@
                     <li>🍽️ Share your own creations with a passionate community.</li>
                 </ul>
             </div>
-        
-            <div class="poll-container" style="transform: scale(0.8); transform-origin: top; margin: 5px auto;">
-                <script src="https://static.elfsight.com/platform/platform.js" async></script>
-                <div class="elfsight-app-6135ec1e-788e-4439-833b-e3b78168af3d" data-elfsight-app-lazy></div>
-            </div>
         </div>
     </div>
 
     <div class="recipe-container">
         <br><br>
         <div class="popular-recipe">
+            <!-- if there is a most popular recipe, display the recipe image as a url to the recipe -->
             {% if popular_recipe %}
             <a href="{% url 'Recipes:show_recipe' popular_recipe.slug %}">
                 <img src="{{ popular_recipe.picture.url }}" alt="{{ popular_recipe.recipe_name }}" height="200", width="300"/><br>
@@ -55,6 +54,7 @@
         </div>
 
         <div class="random-recipe">
+            <!-- selects a random recipe and displays the recipe image as a url to the recipe -->
             {% if random_recipe %}
             <a href="{% url 'Recipes:show_recipe' random_recipe.slug %}">
                 <img src="{{ random_recipe.picture.url }}" alt="{{ random_recipe.recipe_name }}" height="200", width="300"/><br>
@@ -65,6 +65,7 @@
             {% endif %}
         </div>
 
+        <!-- links to main parts of the website -->
         <div class="explore">
             Check out all of our recipes <a href="{% url 'Recipes:recipes' %}">here!</a>
             <br><br>
@@ -73,11 +74,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-});
-</script>
 {% endblock %}

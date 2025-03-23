@@ -9,14 +9,17 @@ from Recipes.models import Cuisine, Difficulty, Recipe, Ingredients, UserProfile
 from django.contrib.auth.models import User
 
 def populate():
+    # populate the cuisines table
     cuisines = ['Italian', 'Chinese', 'Mexican', 'French', 'Japanese']
     for cuisine_name in cuisines:
         Cuisine.objects.get_or_create(name=cuisine_name)
     
+    # populates the difficulty table
     difficulties = ['Easy', 'Medium', 'Hard']
     for level in difficulties:
         Difficulty.objects.get_or_create(difficulty=level)
     
+    # creates a generic user used to upload recipes
     user, created = User.objects.get_or_create(
         username='testuser',
         defaults={'email': 'test@example.com'}
@@ -26,6 +29,7 @@ def populate():
         user.save()
     author, created = UserProfile.objects.get_or_create(user=user)
 
+    # creates a generic user used to review recipes
     reviewer, created = User.objects.get_or_create(
         username='reviewer',
         defaults={'email': 'reviewer@example.com'}
@@ -35,6 +39,7 @@ def populate():
         reviewer.save()
     reviewer_profile, created = UserProfile.objects.get_or_create(user=reviewer)
     
+    # creates 5 recipes information
     recipes = [
         {
             'recipe_name': 'Spaghetti Carbonara',
@@ -110,6 +115,7 @@ def populate():
         }
     ]
     
+    # creates the ingredients for the recipes
     recipe_ingredients = {
         'Spaghetti Carbonara': [
             {'ingredient_name': 'Spaghetti', 'quantity': Decimal('200')},
@@ -143,6 +149,7 @@ def populate():
         ]
     }
 
+    # creates the info for the reviews of the recipes
     reviews = {
         'Spaghetti Carbonara': [
             {'rating': 4, 'comment': 'Delicious and creamy.'}
@@ -161,6 +168,7 @@ def populate():
         ]
     }
     
+    # populates the recipes into the recipe table
     for r in recipes:
         cuisine = Cuisine.objects.get(name=r['cuisine'])
         difficulty = Difficulty.objects.get(difficulty=r['difficulty'])
@@ -175,6 +183,7 @@ def populate():
             picture=r['picture']
         )
         
+        # populates the ingredients for each recipe
         if r['recipe_name'] in recipe_ingredients:
             for ing in recipe_ingredients[r['recipe_name']]:
                 Ingredients.objects.get_or_create(
@@ -183,6 +192,7 @@ def populate():
                     quantity=ing['quantity']
                 )
 
+        # populates the reviews for each recipe
         if r['recipe_name'] in reviews:
             for rev in reviews[r['recipe_name']]:
                 Reviews.objects.get_or_create(

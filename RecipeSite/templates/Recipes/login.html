@@ -7,15 +7,18 @@
 {% endblock %}
 
 {% block css_block %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/loginAndRegister.css' %}">
+<script src="{% static 'javascript/preventScroll.js' %}" defer></script>
 {% endblock %}
 
 {% block body_block %}
 <div class="container">
 
     <div class="form-container">
-        <div class="form-box">
+        <div class="login-form-box">
+            
             {% if user.is_authenticated %}
+            <!-- user already logged in, displays message and redirect links -->
             <div class="authenticated">
                 Thank you for logging in!<br><br> 
                 Why not <a href="{% url 'Recipes:recipes' %}">check out some recipes?</a>
@@ -23,21 +26,40 @@
                 <br>
                 <a href="{% url 'Recipes:home' %}">Return to the homepage.</a><br />
             </div>
+
             {% else %}
+            <!-- user not logged in -->
             <div class="title">
                 Log in here!<br />
             </div>
+
             <form id="login_form" method="post" action="{% url 'Recipes:login' %}">
             {% csrf_token %}
+
+            <!-- username input -->
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" />
             </div>
+
+            <!-- password input -->
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" />
             </div>
+
+            <!-- submit button -->
             <input type="submit" class="btn" value="Sign In" />
+
+            {% if login_error %}
+            <!-- user entered wrong login details, display error message -->
+            <div class="error">{{ login_error }}</div>
+            {% endif %}
+
+            {% if disabled_error %}
+            <!-- user entered correct login but account has been disabled -->
+            <div class="error">{{ disabled_error }}</div>
+            {% endif %}
             </form>
 
 
@@ -50,15 +72,9 @@
         </div>
     </div>
 
+    <!-- static image for right side of page -->
     <div class="image-container">
         <img src="{% static 'images/loginPage.jpg' %}" alt="Picture of curry">
     </div>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-});
-</script>
 {% endblock %}
