@@ -18,6 +18,20 @@
     <div class="recipe-container">
         <div class="recipe-header">
             <h1>{{ recipe.recipe_name }}</h1>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'Recipes:add_favourite' recipe.slug %}">
+                    {% csrf_token %}
+                    {% if is_favorite %}
+                        <input type="hidden" name="action" value="remove">
+                        <button type="submit" class="favourite-btn remove">Remove from Favourites</button>
+                    {% else %}
+                        <input type="hidden" name="action" value="add">
+                        <button type="submit" class="favourite-btn">Add to Favourites</button>
+                    {% endif %}
+                </form>
+                </form>
+            {% endif %}
+
             <div class="recipe-meta">
                 <p>Cuisine: {{ recipe.cuisine }}</p>
                 <p>Difficulty: {{ recipe.difficulty }}</p>

@@ -76,6 +76,12 @@ def create_account(request):
 def show_recipe(request, recipe_name_slug):
     try:
         recipe = Recipe.objects.get(slug=recipe_name_slug)
+        is_favorite = False
+        if request.user.is_authenticated:
+            is_favorite = Favourites.objects.filter(
+                user=request.user.userprofile, 
+                recipe=recipe
+            ).exists()
     except Recipe.DoesNotExist:
         return HttpResponse("Recipe not found", status=404)
 
@@ -109,6 +115,7 @@ def show_recipe(request, recipe_name_slug):
         'avg_rating': avg_rating,
         'rating_form': rating_form,
         'comment_form': comment_form,
+        'is_favorite': is_favorite,
     }
     return render(request, 'Recipes/show_recipe.html', context)
 
@@ -167,14 +174,23 @@ def favourites(request):
 
 # Add recipe to user's favourites
 @login_required
-def add_favourite(request, recipe_slug):
-    try:
-        recipe = Recipe.objects.get(slug=recipe_slug)
-    except Recipe.DoesNotExist:
-        return HttpResponse("Recipe not found", status=404)
-    
-    Favourites.objects.get_or_create(user=request.user.userprofile, recipe=recipe)
-    return redirect('Recipes:show_recipe', recipe_slug=recipe.slug)
+def add_favourite(request, recipe_name_slug):
+    if request.method == 'POST':
+        try:
+            recipe = Recipe.objects.get(slug=recipe_name_slug)
+            user_profile = request.user.userprofile
+            action = request.POST.get('action')
+                
+            if action == 'remove':
+                Favourites.objects.filter(user=user_profile, recipe=recipe).delete()
+            else:
+                if not Favourites.objects.filter(user=user_profile, recipe=recipe).exists():
+                    Favourites.objects.create(user=user_profile, recipe=recipe)
+                        
+        except Recipe.DoesNotExist:
+            return HttpResponse("Recipe not found", status=404)
+    return redirect('Recipes:show_recipe', recipe_name_slug=recipe_name_slug)
+
 
 # Search recipes 
 def search(request):

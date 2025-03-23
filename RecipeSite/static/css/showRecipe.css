@@ -69,3 +69,27 @@
 .btn:hover {
     background-color: #c0392b;
 }
+
+.favourite-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.favourite-btn:hover {
+    background-color: #c0392b;
+}
+
+.favourite-btn.remove {
+    background-color: #95a5a6;
+}
+
+.favourite-btn.remove:hover {
+    background-color: #7f8c8d;
+}
