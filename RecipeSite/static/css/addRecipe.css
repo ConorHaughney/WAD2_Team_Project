@@ -117,24 +117,19 @@ html {
     margin-top: 30px;
 }
 
-.submit-btn,
 .cancel-btn {
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-}
-
-.submit-btn {
-    background-color: #e74c3c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #95a5a6;
     color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
     border: none;
-}
-
-.submit-btn:hover {
-    background-color: #c0392b;
+    cursor: pointer;
 }
 
 .cancel-btn {

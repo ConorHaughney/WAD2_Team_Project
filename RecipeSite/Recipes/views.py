@@ -6,6 +6,7 @@ from django.db.models import Avg
 from django.urls import reverse
 from Recipes.forms import RecipeForm, ReviewForm, UserForm, UserProfileForm
 from Recipes.models import Recipe, Favourites, Reviews, UserProfile
+from django.db.models.functions import Lower
 
 # Home page showing most popular recipes
 def home(request):
@@ -20,17 +21,57 @@ def home(request):
 
 # Recipe list page
 def recipes(request):
-    context_dict = {}
+    recipes_list = Recipe.objects.all()
+    
     search_query = request.GET.get('search', '')
-     
     if search_query:
-        recipes = Recipe.objects.filter(recipe_name__icontains=search_query)
-        context_dict['recipes'] = recipes
-        context_dict['search_query'] = search_query
-        if not recipes:
-            context_dict['all_recipes'] = Recipe.objects.all().order_by('recipe_name')
+        recipes_list = recipes_list.filter(recipe_name__icontains=search_query)
+        
+    recipes_list = Recipe.objects.annotate(avg_rating=Avg('reviews__rating'))
+        
+    sort_options = {
+        'time_asc': 'Quick Recipes First',
+        'time_desc': 'Long Recipes First',
+        'portion_asc': 'Small Portions First', 
+        'portion_desc': 'Large Portions First',
+        'name': 'Alphabetical Order'
+    }
+    
+    sort_by = request.GET.get('sort', '')
+    if sort_by == 'time_asc':
+        recipes_list = recipes_list.order_by('time_taken')
+    elif sort_by == 'time_desc':
+        recipes_list = recipes_list.order_by('-time_taken')
+    elif sort_by == 'portion_asc':
+        recipes_list = recipes_list.order_by('portion')
+    elif sort_by == 'portion_desc':
+        recipes_list = recipes_list.order_by('-portion')
+    elif sort_by == 'name':
+        recipes_list = recipes_list.order_by(Lower('recipe_name'))
     else:
-        context_dict['recipes'] = Recipe.objects.all().order_by('recipe_name')
+        recipes_list = recipes_list.order_by(Lower('recipe_name'))
+    
+    selected_cuisines = request.GET.getlist('cuisine')
+    if selected_cuisines:
+        recipes_list = recipes_list.filter(cuisine__in=selected_cuisines)
+        
+    selected_difficulties = request.GET.getlist('difficulty')
+    if selected_difficulties:
+        recipes_list = recipes_list.filter(difficulty__in=selected_difficulties)
+
+    cuisines = Recipe.objects.values_list('cuisine', flat=True).distinct()
+    difficulties = Recipe.objects.values_list('difficulty', flat=True).distinct()
+    
+    context_dict = {
+        'recipes': recipes_list,
+        'search_query': search_query,
+        'cuisines': cuisines,
+        'difficulties': difficulties,
+        'selected_cuisines': selected_cuisines,
+        'selected_difficulties': selected_difficulties,
+        'sort_options': sort_options,
+        'sort_by': sort_by
+    }
      
     return render(request, 'Recipes/recipes.html', context=context_dict)
 
@@ -82,39 +123,33 @@ def show_recipe(request, recipe_name_slug):
                 user=request.user.userprofile, 
                 recipe=recipe
             ).exists()
+            
+        if request.method == 'POST' and request.user.is_authenticated:
+            review_form = ReviewForm(request.POST)
+            if review_form.is_valid():
+                review = Reviews.objects.get_or_create(
+                    user=request.user.userprofile,
+                    recipe=recipe,
+                    defaults={'rating': request.POST.get('rating')}
+                )[0]
+                
+                review_form = ReviewForm(request.POST, instance=review)
+                review_form.save()
+                return redirect('Recipes:show_recipe', recipe_name_slug=recipe_name_slug)
+        else:
+            review_form = ReviewForm()
+            
     except Recipe.DoesNotExist:
         return HttpResponse("Recipe not found", status=404)
 
     comments = recipe.reviews_set.all()
     avg_rating = recipe.reviews_set.aggregate(Avg('rating'))['rating__avg'] or 0
-    rating_form = ReviewForm()
-    comment_form = ReviewForm()
-
-    if request.method == 'POST':
-        if 'comment' in request.POST:
-            comment_form = ReviewForm(request.POST)
-            if comment_form.is_valid():
-                comment = comment_form.save(commit=False)
-                comment.recipe = recipe
-                comment.user = request.user.userprofile  
-                comment.save()
-                return redirect('Recipes:show_recipe', recipe_slug=recipe.slug)
-
-        elif 'rating' in request.POST:
-            rating_form = ReviewForm(request.POST)
-            if rating_form.is_valid():
-                rating = rating_form.save(commit=False)
-                rating.recipe = recipe
-                rating.user = request.user.userprofile 
-                rating.save()
-                return redirect('Recipes:show_recipe', recipe_slug=recipe.slug)
 
     context = {
         'recipe': recipe,
         'comments': comments,
         'avg_rating': avg_rating,
-        'rating_form': rating_form,
-        'comment_form': comment_form,
+        'rating_form': ReviewForm(),
         'is_favorite': is_favorite,
     }
     return render(request, 'Recipes/show_recipe.html', context)

@@ -32,7 +32,7 @@ html {
 .recipe-card {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
 }
@@ -64,17 +64,13 @@ html {
     margin-top: 10px;
 }
 
-.view-recipe-btn:hover {
-    background-color: #c0392b;
-}
-
 .no-recipes,
 .auth-message {
     text-align: center;
     padding: 50px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     max-width: 600px;
 }

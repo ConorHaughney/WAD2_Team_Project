@@ -48,4 +48,5 @@ class ReviewForm(forms.ModelForm):
         fields = ['rating', 'comment']
         widgets = {
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+            'style': 'font-family: Arial, sans-serif; font-size: 14px;',
         }
