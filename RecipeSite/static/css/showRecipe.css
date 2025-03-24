@@ -4,7 +4,7 @@
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .recipe-header {
@@ -33,7 +33,7 @@
     border-radius: 10px;
 }
 
-.recipe-instructions, 
+.recipe-instructions,
 .recipe-ingredients {
     background-color: #f9f9f9;
     padding: 20px;
@@ -66,6 +66,85 @@
     margin-top: 20px;
 }
 
-.btn:hover {
-    background-color: #c0392b;
+.favourite-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.favourite-btn.remove {
+    background-color: #95a5a6;
+}
+
+.favourite-btn.remove:hover {
+    background-color: #7f8c8d;
+}
+
+.review-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.rating-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.rating-form select,
+.rating-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.rating-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.review-rating {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.review-author {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: flex-start;
 }

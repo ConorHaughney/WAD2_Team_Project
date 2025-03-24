@@ -32,46 +32,82 @@
     </div>
 </div>  
 
-<br>
-<br>
-<br>
+<div class="page-layout">
+    <div class="filter-sidebar">
+        <h3>Filter and Sort Recipes</h3>
+        <form method="get" action="{% url 'Recipes:recipes' %}">
+            <div class="filter-section">
+                <h4>Cuisine Type</h4>
+                {% for cuisine in cuisines %}
+                    <label>
+                        <input type="checkbox" name="cuisine" value="{{ cuisine }}"
+                        {% if cuisine in selected_cuisines %}checked{% endif %}>
+                        {{ cuisine }}
+                    </label>
+                {% endfor %}
+            </div>
 
-<div id="content-wrapper">
-    {% if search_query %}
-        <h2>Search Results for "{{ search_query }}"</h2>
-        {% if recipes %}
-            {% for recipe in recipes %}
-                <div class="recipe-card">
-                    <h3>{{ recipe.recipe_name }}</h3>
-                    <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
-                </div>
+            <div class="filter-section">
+                <h4>Difficulty Level</h4>
+                {% for difficulty in difficulties %}
+                    <label>
+                        <input type="checkbox" name="difficulty" value="{{ difficulty }}"
+                        {% if difficulty in selected_difficulties %}checked{% endif %}>
+                        {{ difficulty }}
+                    </label>
+                {% endfor %}
+            </div>
+
+            <div class="filter-section">
+                <h4>Sort By</h4>
+                {% for value, label in sort_options.items %}
+                <label>
+                    <input type="radio" name="sort" value="{{ value }}" {% if sort_by == value %}checked{% endif %}>
+                    {{ label }}
+                </label>
             {% endfor %}
+            </div>
+
+            <button type="submit" class="filter-btn">Apply Filters</button>
+        </form>
+    </div>
+
+    <div id="content-wrapper">
+        {% if search_query %}
+            <h2>Search Results for "{{ search_query }}"</h2>
         {% else %}
-            <h2>No recipes found for "{{ search_query }}". Showing all recipes instead:</h2>
-            {% if all_recipes %}
-                {% for recipe in all_recipes %}
+            <h2>All Recipes</h2>
+        {% endif %}
+
+        {% if recipes %}
+            <div class="recipe-grid">
+                {% for recipe in recipes %}
                     <div class="recipe-card">
-                        <h3>{{ recipe.recipe_name }}</h3>
-                        <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
+                        <div class="recipe-image">
+                            <a href="{% url 'Recipes:show_recipe' recipe.slug %}"><img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}"></a>
+                        </div>
+                        <div class="recipe-info">
+                            <h2>{{ recipe.recipe_name }}</h2>
+                            <div class="rating">
+                                {% if recipe.avg_rating %}
+                                    <span>Average Rating: {{ recipe.avg_rating|floatformat:1 }} / 5</span>
+                                {% else %}
+                                    <span>No ratings yet</span>
+                                {% endif %}
+                            </div>
+                            <p>Cuisine: {{ recipe.cuisine }}</p>
+                            <p>Time: {{ recipe.time_taken }} minutes</p>
+                            <p>Difficulty: {{ recipe.difficulty }}</p>
+                            <p>Author: {{ recipe.author }}</p>
+                            <a href="{% url 'Recipes:show_recipe' recipe.slug %}" class="view-recipe-btn">View Recipe</a>
+                        </div>
                     </div>
                 {% endfor %}
-            {% else %}
-                <p>No recipes available yet. Be the first to add one!</p>
-            {% endif %}
-        {% endif %}
-    {% else %}
-        <h2>All Recipes</h2>
-        {% if recipes %}
-            {% for recipe in recipes %}
-                <div class="recipe-card">
-                    <h3>{{ recipe.recipe_name }}</h3>
-                    <a href="{% url 'Recipes:show_recipe' recipe.slug %}">View Recipe</a>
-                </div>
-            {% endfor %}
+            </div>
         {% else %}
             <p>No recipes available yet. Be the first to add one!</p>
         {% endif %}
-    {% endif %}
+    </div>
 </div>
 
 {% endblock %}

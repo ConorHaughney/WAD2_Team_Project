@@ -30,6 +30,13 @@ class UserProfileForm(forms.ModelForm):
 
 # Add Recipe form
 class RecipeForm(forms.ModelForm):
+    
+    instructions = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Write your recipe instructions here...',
+            'style': 'font-family: Arial, sans-serif; font-size: 14px;'
+        })
+    )
     class Meta:
         model = Recipe
         fields = ['recipe_name', 'cuisine', 'difficulty', 'time_taken', 'instructions', 'portion', 'picture']
@@ -41,4 +48,5 @@ class ReviewForm(forms.ModelForm):
         fields = ['rating', 'comment']
         widgets = {
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+            'style': 'font-family: Arial, sans-serif; font-size: 14px;',
         }

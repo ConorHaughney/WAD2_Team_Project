@@ -18,6 +18,20 @@
     <div class="recipe-container">
         <div class="recipe-header">
             <h1>{{ recipe.recipe_name }}</h1>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'Recipes:add_favourite' recipe.slug %}">
+                    {% csrf_token %}
+                    {% if is_favorite %}
+                        <input type="hidden" name="action" value="remove">
+                        <button type="submit" class="favourite-btn remove">Remove from Favourites</button>
+                    {% else %}
+                        <input type="hidden" name="action" value="add">
+                        <button type="submit" class="favourite-btn">Add to Favourites</button>
+                    {% endif %}
+                </form>
+                </form>
+            {% endif %}
+
             <div class="recipe-meta">
                 <p>Cuisine: {{ recipe.cuisine }}</p>
                 <p>Difficulty: {{ recipe.difficulty }}</p>
@@ -46,6 +60,39 @@
                 </ul>
             </div>
         </div>
+        <div class="review-section">
+            {% if user.is_authenticated %}
+                <h2>Rate this Recipe</h2>
+                <form method="post" action="{% url 'Recipes:show_recipe' recipe.slug %}">
+                    {% csrf_token %}
+                    <div class="rating-form">
+                        {{ rating_form.rating.label_tag }}
+                        {{ rating_form.rating }}
+                        {{ rating_form.comment.label_tag }}
+                        {{ rating_form.comment }}
+                        <button type="submit" class="submit-btn">Submit Review</button>
+                    </div>
+                </form>
+            {% endif %}
+        
+            <h2>Reviews</h2>
+            {% if recipe.reviews_set.all %}
+                <div class="reviews-list">
+                    {% for review in recipe.reviews_set.all %}
+                        <div class="review-item">
+                            <p class="review-rating">Rating: {{ review.rating }}/5</p>
+                            <p class="review-comment">{{ review.comment }}</p>
+                            <p class="review-author">- {{ review.user }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% if user.is_authenticated %}
+                    <p>No reviews yet. Be the first to review! </p>
+                {% else %}
+                    <p>No reviews yet. <a href="{% url 'Recipes:login' %}">Login</a> to be the first to review!</p>
+                {% endif %}
+            {% endif %}
     </div>
 {% else %}
     <div class="no-recipe">

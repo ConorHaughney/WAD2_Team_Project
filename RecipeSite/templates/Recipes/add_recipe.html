@@ -1,8 +1,105 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
-    Add Recipe
+    Add Your Recipe
 {% endblock %}
-{% block body_block %}
 
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/addRecipe.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="page-container">
+    <div class="header2">
+        <h1>Share Your Recipe</h1>
+    </div>
+
+    <div class="form-container">
+        {% if user.is_authenticated %}
+            <div class="recipe-form">
+                <form method="post" action="{% url 'Recipes:add_recipe' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="id_recipe_name">Recipe Name:</label>
+                            {{ form.recipe_name }}
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="id_cuisine">Cuisine Type:</label>
+                                {{ form.cuisine }}
+                            </div>
+                            <div class="form-group half">
+                                <label for="id_difficulty">Difficulty Level:</label>
+                                {{ form.difficulty }}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="id_time_taken">Cooking Time (mins):</label>
+                                {{ form.time_taken }}
+                            </div>
+                            <div class="form-group half">
+                                <label for="id_portion">Number of Servings:</label>
+                                {{ form.portion }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="id_instructions">Cooking Instructions:</label>
+                            {{ form.instructions }}
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="id_picture">Recipe Photo:</label>
+                            <div class="image-upload">
+                                {{ form.picture }}
+                                <div class="preview-container">
+                                    <img id="preview" src="#" alt="Recipe preview">
+                                    <p class="preview-text">No image selected</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Share Recipe</button>
+                        <a href="{% url 'Recipes:recipes' %}" class="cancel-btn">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        {%endif%}
+    </div>
+</div>
+
+<script>
+    document.getElementById("id_picture").addEventListener("change", function(event) {
+        const input = event.target;
+        const preview = document.getElementById("preview");
+        const previewText = document.querySelector(".preview-text");
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+                previewText.style.display = "none";
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.style.display = "none";
+            previewText.style.display = "block";
+        }
+    });
+</script>
 {% endblock %}

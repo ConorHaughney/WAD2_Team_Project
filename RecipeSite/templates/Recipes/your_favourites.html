@@ -1,8 +1,48 @@
 {% extends 'Recipes/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
-    Your Favorites
+    Your Favourites
 {% endblock %}
-{% block body_block %}
 
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/baseStyle.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/yourFavourites.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="header2">
+    <h1>Your Favourite Recipes</h1>
+</div>
+
+<div class="content-wrapper">
+    {% if user.is_authenticated %}
+        {% if Recipes %}
+            <div class="recipe-grid">
+                {% for recipe in Recipes %}
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            <img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}">
+                        </div>
+                        <div class="recipe-info">
+                            <h2>{{ recipe.recipe_name }}</h2>
+                            <p>Cuisine: {{ recipe.cuisine }}</p>
+                            <p>Time: {{ recipe.time_taken }} minutes</p>
+                            <a href="{% url 'Recipes:show_recipe' recipe.slug %}" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-recipes">
+                <p>You haven't added any recipes to your favourites yet!</p>
+                <p>Browse our <a href="{% url 'Recipes:recipes' %}">recipes</a> to find some favourites.</p>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="auth-message">
+            <p>Please <a href="{% url 'Recipes:login' %}">log in</a> to see your favourite recipes.</p>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
