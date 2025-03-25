@@ -158,3 +158,46 @@ html {
 .auth-message a:hover {
     text-decoration: underline;
 }
+
+.ingredient-row {
+    position: relative;
+    padding-right: 40px;
+}
+
+.remove-ingredient {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add-ingredient {
+    width: auto;
+    padding: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.btn-add-ingredient:hover {
+    background-color: #c0392b;
+}

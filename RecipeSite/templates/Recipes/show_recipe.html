@@ -55,7 +55,7 @@
                 <h2>Ingredients</h2>
                 <ul>
                 {% for ingredient in recipe.ingredients_set.all %}
-                    <li>{{ ingredient.ingredient_name }}: {{ ingredient.quantity }}</li>
+                    <li>{{ ingredient.ingredient_name }}: {{ ingredient.quantity }}g</li>
                 {% endfor %}
                 </ul>
             </div>
