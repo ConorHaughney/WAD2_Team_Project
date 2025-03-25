@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from Recipes.models import UserProfile, Recipe, Reviews
+from Recipes.models import UserProfile, Recipe, Reviews, Ingredients
 
 # User registration form
 class UserForm(forms.ModelForm):
@@ -30,6 +30,23 @@ class UserProfileForm(forms.ModelForm):
 
 # Add Recipe form
 class RecipeForm(forms.ModelForm):
+    time_taken = forms.IntegerField(
+        min_value=0,
+        widget=forms.NumberInput(attrs={
+            'min': '0',
+            'required': True
+        })
+    )
+    
+    portion = forms.IntegerField(
+        min_value=1,
+        max_value=10,
+        widget=forms.NumberInput(attrs={
+            'min': '1',
+            'max': '10000',
+            'required': True
+        })
+    )
     
     instructions = forms.CharField(
         widget=forms.Textarea(attrs={
@@ -49,4 +66,21 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
             'style': 'font-family: Arial, sans-serif; font-size: 14px;',
+        }
+        
+# Add ingredient form
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredients
+        fields = ['ingredient_name', 'quantity']
+        widgets = {
+            'ingredient_name': forms.TextInput(attrs={
+                'maxlength': 15,
+                'required': True,
+            }),
+            'quantity': forms.NumberInput(attrs={
+                'min': 1,
+                'max': 10000,
+                'required': True,
+            })
         }

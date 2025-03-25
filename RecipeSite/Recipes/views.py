@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.urls import reverse
-from Recipes.forms import RecipeForm, ReviewForm, UserForm, UserProfileForm
-from Recipes.models import Recipe, Favourites, Reviews, UserProfile
+from Recipes.forms import RecipeForm, ReviewForm, UserForm, UserProfileForm, IngredientForm
+from Recipes.models import Recipe, Favourites, Reviews, UserProfile, Ingredients
 from django.db.models.functions import Lower
 
 # Home page showing most popular recipes
@@ -183,10 +183,22 @@ def add_recipe(request):
             recipe = form.save(commit=False)
             recipe.author = request.user.userprofile  
             recipe.save()
+            
+            ingredient_names = request.POST.getlist('ingredient_name')
+            ingredient_quantities = request.POST.getlist('quantity')
+            
+            for name, quantity in zip(ingredient_names, ingredient_quantities):
+                if name and quantity:
+                    Ingredients.objects.create(
+                        recipe=recipe,
+                        ingredient_name=name,
+                        quantity=quantity
+                    )
             return redirect('Recipes:show_recipe', recipe_name_slug=recipe.slug)
     else:
         form = RecipeForm()
-    return render(request, 'Recipes/add_recipe.html', {'form': form})
+        ingredient_form = IngredientForm()
+    return render(request, 'Recipes/add_recipe.html', {'form': form, 'ingredient_form': ingredient_form})
 
 # User logout
 @login_required

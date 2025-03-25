@@ -8,6 +8,7 @@
 {% block css_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/addRecipe.css' %}">
 <script src="{% static 'javascript/previewImage.js' %}"></script>
+<script src="{% static 'javascript/ingredients.js' %}"></script>
 {% endblock %}
 
 {% block body_block %}
@@ -49,6 +50,23 @@
                                 {{ form.portion }}
                             </div>
                         </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Ingredients</h4>
+                        <div id="ingredients-container">
+                            <div class="ingredient-row form-row">
+                                <div class="form-group half">
+                                    <label>Ingredient Name:</label>
+                                    {{ ingredient_form.ingredient_name }}
+                                </div>
+                                <div class="form-group half">
+                                    <label>Quantity:</label>
+                                    {{ ingredient_form.quantity }}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-ingredient" id="add-ingredient">Add Extra Ingredient</button>
                     </div>
 
                     <div class="form-section">
