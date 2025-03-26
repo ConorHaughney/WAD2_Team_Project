@@ -7,6 +7,7 @@
 
 {% block css_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/addRecipe.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/baseStyle.css' %}">
 {% endblock %}
 
 {% block script_block %}
@@ -22,7 +23,7 @@
 
     <div class="form-container">
         {% if user.is_authenticated %}
-            <div class="recipe-form">
+            <div class="form-recipe">
                 <form method="post" action="{% url 'Recipes:add_recipe' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     

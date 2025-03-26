@@ -7,6 +7,7 @@
 
 {% block css_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/mostPopular.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/baseStyle.css' %}">
 {% endblock %}
 
 {% block body_block %}
@@ -20,7 +21,7 @@
             {% for recipe in Recipes %}
                 <div class="recipe-card">
                     <div class="recipe-image">
-                        <img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}">
+                        <a href="{% url 'Recipes:show_recipe' recipe.slug %}"><img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}"></a>
                     </div>
                     <div class="recipe-info">
                         <h2>{{ recipe.recipe_name }}</h2>
