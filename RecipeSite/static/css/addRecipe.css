@@ -97,21 +97,6 @@
     margin-top: 30px;
 }
 
-.cancel-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #95a5a6;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-}
-
 .auth-message {
     text-align: center;
     padding: 40px;
@@ -129,11 +114,11 @@
     position: absolute;
     right: 0;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     background: #95a5a6;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     width: 25px;
     height: 25px;
     cursor: pointer;
@@ -142,19 +127,9 @@
     justify-content: center;
 }
 
-.btn-add-ingredient {
+.add-ingredient-btn {
     width: auto;
-    padding: 10px;
-    background-color: #e74c3c;
-    color: #fff;
-    font-size: 16px;
     border-radius: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
     margin-bottom: 10px;
-    align-items: center;
-    justify-content: center;
     margin: 0;
 }

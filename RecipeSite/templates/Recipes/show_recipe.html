@@ -98,7 +98,7 @@
 {% else %}
     <div class="no-recipe">
         <p>This recipe does not exist.</p>
-        <a href="{% url 'Recipes:add_recipe' %}" class="btn">Add your own!</a>
+        <a href="{% url 'Recipes:add_recipe' %}" class="no-recipe-btn">Add your own!</a>
     </div>
 {% endif %}
 {% endblock %}

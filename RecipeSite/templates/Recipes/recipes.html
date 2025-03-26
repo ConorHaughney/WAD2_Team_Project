@@ -100,7 +100,7 @@
                             <p>Time: {{ recipe.time_taken }} minutes</p>
                             <p>Difficulty: {{ recipe.difficulty }}</p>
                             <p>Author: {{ recipe.author }}</p>
-                            <a href="{% url 'Recipes:show_recipe' recipe.slug %}" class="view-recipe-btn">View Recipe</a>
+                            <a href="{% url 'Recipes:show_recipe' recipe.slug %}" class="main-btn">View Recipe</a>
                         </div>
                     </div>
                 {% endfor %}
