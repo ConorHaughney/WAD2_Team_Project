@@ -64,8 +64,16 @@ class ReviewForm(forms.ModelForm):
         model = Reviews
         fields = ['rating', 'comment']
         widgets = {
-            'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
-            'style': 'font-family: Arial, sans-serif; font-size: 14px;',
+            'rating': forms.NumberInput(attrs={
+                'min': 1, 
+                'max': 5,
+                'placeholder': 'Rate from 1-5',
+                'style': 'font-family: Arial, sans-serif; font-size: 14px'
+            }),
+            'comment': forms.Textarea(attrs={
+                'style': 'font-family: Arial, sans-serif; font-size: 14px',
+                'placeholder': 'Write your review here...'
+            })
         }
         
 # Add ingredient form
