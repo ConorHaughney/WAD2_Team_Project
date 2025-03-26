@@ -56,25 +56,13 @@
     margin: 100px auto;
 }
 
-.btn {
+.no-recipe-btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
     margin-top: 20px;
 }
 
 .favourite-btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
     margin: 10px auto;
 }
 
@@ -131,12 +119,5 @@
 }
 
 .submit-btn {
-    padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
     align-self: flex-start;
 }

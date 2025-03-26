@@ -7,6 +7,10 @@ html {
     background-color: #f5f5f5;
 }
 
+/* CSS for main navigation bar - used in "add_recipe.html", "create_account.html", "home.html", 
+   "login.html", "most_popular.html", "recipes.html", 
+   "search_recipe.html", "show_recipe.html", "your_favourites.html" */
+
 .main-header ul {
     list-style-type: none;
     margin: 0;
@@ -44,6 +48,10 @@ html {
     background-color: #111;
 }
 
+/* End of CSS for main navigation bar */
+
+/* CSS for the secondary header - "add_recipe.html", "most_popular.html", "recipes.html" and "your_favourites */
+
 .header2 {
     background-color: #404040;
     color: white;
@@ -55,12 +63,19 @@ html {
     z-index: 999;
 }
 
-.view-recipe-btn,
+/* End of CSS for secondary header */
+
+/* CSS for buttons */
+
 .submit-btn,
 .filter-btn,
-.btn,
+.search-btn,
+.no-recipe-btn,
 .favourite-btn,
-.add-recipe-btn {
+.add-recipe-btn,
+.add-ingredient-btn,
+.cancel-btn,
+.main-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,14 +91,14 @@ html {
     cursor: pointer;
 }
 
-.view-recipe-btn:hover,
 .submit-btn:hover,
 .filter-btn:hover,
-.btn:hover,
+.search-btn:hover,
+.no-recipe-btn:hover,
 .favourite-btn:hover,
 .add-recipe-btn:hover,
-.filter-btn:hover,
-.btn-add-ingredient:hover {
+.add-ingredient-btn:hover,
+.main-btn:hover {
     background-color: #c0392b;
 }
 
@@ -97,6 +112,10 @@ html {
 .favourite-btn.remove:hover {
     background-color: #7f8c8d;
 }
+
+/* End of CSS for buttons */
+
+/* CSS for the recipe grid */
 
 .recipe-card {
     background: white;

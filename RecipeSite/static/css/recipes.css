@@ -76,17 +76,7 @@ html {
 
 .filter-btn {
     width: 100%;
-    padding: 10px;
-    background-color: #e74c3c;
-    font-size: 16px;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
     margin-bottom: 10px;
-    align-items: center;
-    justify-content: center;
     margin: 0;
 }
 
