@@ -8,9 +8,11 @@
 
 {% block css_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/loginAndRegister.css' %}">
-    <script src="{% static 'javascript/register.js' %}" defer></script>
-    {% endblock %}
+{% endblock %}
 
+{% block script_block %}
+<script src="{% static 'javascript/register.js' %}" defer></script>
+{% endblock %}
 
 
 <div class="container">
