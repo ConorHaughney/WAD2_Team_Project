@@ -12,6 +12,7 @@
 {% block body_block %}
 <div class="container">
     <div class="form-container">
+        {% comment %} Searches for what the user types without case issues {% endcomment %}
         <div class="form-box">
             <h1>Search Recipe</h1>
             <form method="get" action="{% url 'Recipes:recipes' %}">

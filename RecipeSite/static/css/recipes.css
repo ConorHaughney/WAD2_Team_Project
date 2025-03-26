@@ -1,15 +1,7 @@
-body,
-html {
-    height: 100%;
-    text-align: center;
-}
-
 .header2 {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: fixed;
-    top: 55px;
     left: 0;
     padding: 15px 20px;
     height: 140px;
@@ -44,6 +36,7 @@ html {
 .page-layout {
     display: flex;
     margin-top: 220px;
+    text-align: center;
 }
 
 .filter-sidebar {

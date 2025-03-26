@@ -8,6 +8,7 @@
 
 {% block css_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/loginAndRegister.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/baseStyle.css' %}">
 {% endblock %}
 
 {% block script_block %}
@@ -16,7 +17,7 @@
 
 
 <div class="container">
-    <div class="form-container">
+    <div class="login-form-container">
         <div class="register-form-box">
             {% if user.is_authenticated %}
             <!-- user already logged in, display message and redirect links -->

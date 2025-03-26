@@ -22,6 +22,7 @@
             {% if user.is_authenticated %}
                 <form method="post" action="{% url 'Recipes:add_favourite' recipe.slug %}">
                     {% csrf_token %}
+                    {% comment %} Toggle for favourite recipe {% endcomment %}
                     {% if is_favorite %}
                         <input type="hidden" name="action" value="remove">
                         <button type="submit" class="favourite-btn remove">Remove from Favourites</button>
@@ -33,6 +34,7 @@
                 </form>
             {% endif %}
 
+            {% comment %} Recipe information shown in condensed way {% endcomment %}
             <div class="recipe-meta">
                 <p>Cuisine: {{ recipe.cuisine }}</p>
                 <p>Difficulty: {{ recipe.difficulty }}</p>
@@ -42,16 +44,19 @@
             </div>
         </div>
 
+        {% comment %} Show recipe image {% endcomment %}
         <div class="recipe-content">
             <div class="recipe-image">
                 <img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}">
             </div>
 
+            {% comment %} Cooking Instructions {% endcomment %}
             <div class="recipe-instructions">
                 <h2>Instructions</h2>
                 <p>{{ recipe.instructions }}</p>
             </div>
 
+            {% comment %} Ingredients needed {% endcomment %}
             <div class="recipe-ingredients">
                 <h2>Ingredients</h2>
                 <ul>
@@ -61,6 +66,8 @@
                 </ul>
             </div>
         </div>
+
+        {% comment %} Add review section - or change if a review is already added - 1 review/comment per person {% endcomment %}
         <div class="review-section">
             {% if user.is_authenticated %}
                 <h2>Rate this Recipe</h2>
@@ -76,6 +83,7 @@
                 </form>
             {% endif %}
         
+            {% comment %} Display previous reviews {% endcomment %}
             <h2>Reviews</h2>
             {% if recipe.reviews_set.all %}
                 <div class="reviews-list">
@@ -96,6 +104,7 @@
             {% endif %}
     </div>
 {% else %}
+    {% comment %} If a recipe doesnt exist, show this {% endcomment %}
     <div class="no-recipe">
         <p>This recipe does not exist.</p>
         <a href="{% url 'Recipes:add_recipe' %}" class="no-recipe-btn">Add your own!</a>
