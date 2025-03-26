@@ -1,25 +1,5 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-}
-
 .page-container {
     padding-top: 160px;
-}
-
-.header2 {
-    background-color: #404040;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    top: 45px;
-    width: 100%;
-    z-index: 999;
 }
 
 .form-container {
@@ -28,7 +8,7 @@ html {
     padding: 20px;
 }
 
-.recipe-form {
+.form-recipe {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -132,31 +112,12 @@ html {
     cursor: pointer;
 }
 
-.cancel-btn {
-    background-color: #95a5a6;
-    color: white;
-}
-
-.cancel-btn:hover {
-    background-color: #7f8c8d;
-}
-
 .auth-message {
     text-align: center;
     padding: 40px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.auth-message a {
-    color: #e74c3c;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.auth-message a:hover {
-    text-decoration: underline;
 }
 
 .ingredient-row {
@@ -196,8 +157,4 @@ html {
     align-items: center;
     justify-content: center;
     margin: 0;
-}
-
-.btn-add-ingredient:hover {
-    background-color: #c0392b;
 }

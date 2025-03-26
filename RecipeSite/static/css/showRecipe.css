@@ -75,15 +75,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin: 10px 0;
-}
-
-.favourite-btn.remove {
-    background-color: #95a5a6;
-}
-
-.favourite-btn.remove:hover {
-    background-color: #7f8c8d;
+    margin: 10px auto;
 }
 
 .review-section {
