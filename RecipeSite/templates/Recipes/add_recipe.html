@@ -7,8 +7,11 @@
 
 {% block css_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/addRecipe.css' %}">
-<script src="{% static 'javascript/previewImage.js' %}"></script>
-<script src="{% static 'javascript/ingredients.js' %}"></script>
+{% endblock %}
+
+{% block script_block %}
+<script src="{% static 'javascript/previewImage.js' %}" defer></script>
+<script src="{% static 'javascript/ingredients.js' %}" defer></script>
 {% endblock %}
 
 {% block body_block %}
