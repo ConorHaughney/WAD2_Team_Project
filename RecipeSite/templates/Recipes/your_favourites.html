@@ -17,13 +17,17 @@
 
 <div class="content-wrapper">
     {% if user.is_authenticated %}
+        {% comment %} Display favourited recipes if the user has added any - must be logged in {% endcomment %}
         {% if Recipes %}
             <div class="recipe-grid">
                 {% for recipe in Recipes %}
                     <div class="recipe-card">
+                        {% comment %} Clickable recipe image {% endcomment %}
                         <div class="recipe-image">
-                            <img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}">
+                            <a href="{% url 'Recipes:show_recipe' recipe.slug %}"><img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}"></a>
                         </div>
+
+                        {% comment %} Recipe Info {% endcomment %}
                         <div class="recipe-info">
                             <h2>{{ recipe.recipe_name }}</h2>
                             <p>Cuisine: {{ recipe.cuisine }}</p>
@@ -34,12 +38,14 @@
                 {% endfor %}
             </div>
         {% else %}
+            {% comment %} Displayed if a user has not added any favourites {% endcomment %}
             <div class="auth-message">
                 <p>You haven't added any recipes to your favourites yet!</p>
                 <p>Browse our <a href="{% url 'Recipes:recipes' %}">recipes</a> to find some favourites.</p>
             </div>
         {% endif %}
     {% else %}
+        {% comment %} If user is not logged in, redirect them to the login page {% endcomment %}
         <div class="auth-message">
             <p>Please <a href="{% url 'Recipes:login' %}">log in</a> to see your favourite recipes.</p>
         </div>

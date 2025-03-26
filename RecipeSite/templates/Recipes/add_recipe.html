@@ -27,12 +27,17 @@
                 <form method="post" action="{% url 'Recipes:add_recipe' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     
+                    {% comment %} Area to input new recipe data {% endcomment %}
+                    {% comment %} Recipe name input {% endcomment %}
                     <div class="form-section">
                         <div class="form-group">
                             <label for="id_recipe_name">Recipe Name:</label>
                             {{ form.recipe_name }}
                         </div>
 
+                        {% comment %} Cuisine type input - 
+                                      limited to Chinese, French, Italian and Mexican by forms
+                        {% endcomment %}
                         <div class="form-row">
                             <div class="form-group half">
                                 <label for="id_cuisine">Cuisine Type:</label>
@@ -45,10 +50,13 @@
                         </div>
 
                         <div class="form-row">
+                            {% comment %} Cuisine type input - must be greater than 0 through forms {% endcomment %}
                             <div class="form-group half">
                                 <label for="id_time_taken">Cooking Time (mins):</label>
                                 {{ form.time_taken }}
                             </div>
+
+                            {% comment %} Number of serving input - greater than 1 via forms {% endcomment %}
                             <div class="form-group half">
                                 <label for="id_portion">Number of Servings:</label>
                                 {{ form.portion }}
@@ -56,16 +64,20 @@
                         </div>
                     </div>
 
+                    {% comment %} ingredients section handled by ingredients.js - allows users to add/remove ingredient fields {% endcomment %}
+
                     <div class="form-section">
                         <h4>Ingredients</h4>
                         <div id="ingredients-container">
                             <div class="ingredient-row form-row">
+                                {% comment %} Text input for the ingredient name {% endcomment %}
                                 <div class="form-group half">
                                     <label>Ingredient Name:</label>
                                     {{ ingredient_form.ingredient_name }}
                                 </div>
+                                {% comment %} Number input for quantity {% endcomment %}
                                 <div class="form-group half">
-                                    <label>Quantity:</label>
+                                    <label>Quantity in grams:</label>
                                     {{ ingredient_form.quantity }}
                                 </div>
                             </div>
@@ -75,10 +87,13 @@
 
                     <div class="form-section">
                         <div class="form-group">
+                            {% comment %} Text input for cooking instructions - placeholder in forms {% endcomment %}
                             <label for="id_instructions">Cooking Instructions:</label>
                             {{ form.instructions }}
                         </div>
                     </div>
+
+                    {% comment %} Recipe photo input with JavaScript to preview the image - javascript/previewImage.js {% endcomment %}
 
                     <div class="form-section">
                         <div class="form-group">
@@ -92,6 +107,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {% comment %} Button to submit recipe {% endcomment %}
 
                     <div class="form-actions">
                         <button type="submit" class="submit-btn">Share Recipe</button>

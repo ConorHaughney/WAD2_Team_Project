@@ -60,7 +60,9 @@ def recipes(request):
         recipes_list = recipes_list.filter(difficulty__in=selected_difficulties)
 
     cuisines = Recipe.objects.values_list('cuisine', flat=True).distinct()
-    difficulties = Recipe.objects.values_list('difficulty', flat=True).distinct()
+    
+    difficulties = list(Recipe.objects.values_list('difficulty', flat=True).distinct())
+    difficulties.sort(key=lambda x: str(x)[-1], reverse=True)
     
     context_dict = {
         'recipes': recipes_list,

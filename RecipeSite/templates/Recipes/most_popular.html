@@ -17,9 +17,11 @@
 
 <div class="content-wrapper">
     {% if Recipes %}
+        {% comment %} Display top 9 recipes by average rating {% endcomment %}
         <div class="recipe-grid">
-            {% for recipe in Recipes %}
+            {% for recipe in Recipes|slice:":9" %}
                 <div class="recipe-card">
+                    {% comment %} Recipe Info {% endcomment %}
                     <div class="recipe-image">
                         <a href="{% url 'Recipes:show_recipe' recipe.slug %}"><img src="{{ recipe.picture.url }}" alt="{{ recipe.recipe_name }}"></a>
                     </div>
@@ -40,6 +42,7 @@
             {% endfor %}
         </div>
     {% else %}
+        {% comment %} Display if no recipes are found {% endcomment %}
         <div class="no-recipes">
             <p>No recipes found. Be the first to add and rate a recipe!</p>
             <a href="{% url 'Recipes:add_recipe' %}" class="add-recipe-btn">Add Recipe</a>
