@@ -14,6 +14,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/baseStyle.css' %}">
 {% endblock %}
 
+{% block script_block %}
+<script src="{% static 'javascript/ratingButtons.js' %}" defer></script>
+{% endblock %}
+
 {% block body_block %}
 {% if recipe %}
     <div class="recipe-container">
@@ -75,8 +79,13 @@
                     {% csrf_token %}
                     <div class="rating-form">
                         {{ rating_form.rating.label_tag }}
-                        {{ rating_form.rating }}
-                        {{ rating_form.comment.label_tag }}
+                        <div class="rating-buttons">
+                            {% for i in "12345" %}
+                                <button type="button" class="rating-btn" data-value="{{ i }}">{{ i }}</button>
+                            {% endfor %}
+                        </div>
+                        {{ rating_form.rating.as_hidden }}
+                        {{ rating_form.comment.label_tag }} 
                         {{ rating_form.comment }}
                         <button type="submit" class="submit-btn">Submit Review</button>
                     </div>

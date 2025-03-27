@@ -1,14 +1,14 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // prevents the user from being able to scroll the page
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
 
     // displays a preview of the uploaded profile picture
-    document.getElementById("id_picture").addEventListener("change", function(event) {
+    document.getElementById("id_picture").addEventListener("change", function (event) {
         var input = event.target;
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 var preview = document.getElementById("preview");
                 preview.src = e.target.result;
                 preview.style.display = "block";

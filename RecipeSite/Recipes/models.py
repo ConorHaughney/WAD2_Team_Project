@@ -108,7 +108,7 @@ class Reviews(models.Model):
     # contains who reviews it, which recipe they reviewed, their comment and the rating they gave
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    comment = models.TextField()
+    comment = models.TextField(blank=True)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     def __str__(self):
