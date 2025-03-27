@@ -121,3 +121,39 @@
 .submit-btn {
     align-self: flex-start;
 }
+
+.rating-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+.rating-btn {
+    flex: 1;
+    min-width: 60px;
+    max-width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #e74c3c;
+    background: white;
+    color: #e74c3c;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rating-btn:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.rating-btn.active {
+    background: #c0392b;
+    border-color: #c0392b;
+    color: white;
+    transition: all 0.3s ease;
+}

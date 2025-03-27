@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const addIngredientBtn = document.getElementById('add-ingredient');
     const ingredientsContainer = document.getElementById('ingredients-container');
 
-    addIngredientBtn.addEventListener('click', function() {
+    addIngredientBtn.addEventListener('click', function () {
         const ingredientRow = document.createElement('div');
         ingredientRow.className = 'ingredient-row form-row';
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         removeButton.type = 'button';
         removeButton.className = 'remove-ingredient';
         removeButton.textContent = 'X';
-        removeButton.onclick = function() {
+        removeButton.onclick = function () {
             this.parentElement.remove();
         };
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ingredientRow.appendChild(nameGroup);
         ingredientRow.appendChild(quantityGroup);
         ingredientRow.appendChild(removeButton);
-        
+
         ingredientsContainer.appendChild(ingredientRow);
     });
 });
