@@ -27,7 +27,7 @@ SECRET_KEY = '*2g^8bm(*#apr+ob3sn_0mcv^!3d3ujl(pg%8oy%&@dg*j$v_*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['finerstorm30.pythonanywhere.com']
 
 
 # Application definition
