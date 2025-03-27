@@ -12,8 +12,9 @@ from django.db.models.functions import Lower
 def home(request):
     popular_recipe = Recipe.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating').first()
     random_recipe = popular_recipe
-    while random_recipe == popular_recipe:
-        random_recipe = Recipe.objects.order_by('?').first()
+    if random_recipe == popular_recipe and Recipe.objects.count() > 1:
+        while random_recipe == popular_recipe:
+            random_recipe = Recipe.objects.order_by('?').first()
     context_dict = {'popular_recipe': popular_recipe,
                     'random_recipe': random_recipe}
     
