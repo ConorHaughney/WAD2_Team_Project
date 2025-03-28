@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Cuisine, Difficulty, Recipe, Ingredients
+from .models import UserProfile, Cuisine, Difficulty, Recipe, Ingredients, Reviews
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -24,4 +24,9 @@ class RecipeAdmin(admin.ModelAdmin):
 @admin.register(Ingredients)
 class IngredientsAdmin(admin.ModelAdmin):
     list_display = ('recipe', 'ingredient_name', 'quantity')
+    ordering = ('recipe',)
+
+@admin.register(Reviews)
+class IngredientsAdmin(admin.ModelAdmin):
+    list_display = ('recipe', 'user', 'comment', 'rating')
     ordering = ('recipe',)
