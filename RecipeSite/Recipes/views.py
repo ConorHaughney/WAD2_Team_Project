@@ -7,6 +7,7 @@ from django.urls import reverse
 from Recipes.forms import RecipeForm, ReviewForm, UserForm, UserProfileForm, IngredientForm
 from Recipes.models import Recipe, Favourites, Reviews, UserProfile, Ingredients
 from django.db.models.functions import Lower
+from django.db import IntegrityError
 
 # Home page showing most popular recipes
 def home(request):
@@ -178,27 +179,31 @@ def user_login(request):
 # Add new recipe (requires login)
 @login_required
 def add_recipe(request):
+    form = RecipeForm()
+    ingredient_form = IngredientForm()
+    
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
-            recipe = form.save(commit=False)
-            recipe.author = request.user.userprofile  
-            recipe.save()
+            try:
+                recipe = form.save(commit=False)
+                recipe.author = request.user.userprofile  
+                recipe.save()
             
-            ingredient_names = request.POST.getlist('ingredient_name')
-            ingredient_quantities = request.POST.getlist('quantity')
+                ingredient_names = request.POST.getlist('ingredient_name')
+                ingredient_quantities = request.POST.getlist('quantity')
             
-            for name, quantity in zip(ingredient_names, ingredient_quantities):
-                if name and quantity:
-                    Ingredients.objects.create(
-                        recipe=recipe,
-                        ingredient_name=name,
-                        quantity=quantity
-                    )
-            return redirect('Recipes:show_recipe', recipe_name_slug=recipe.slug)
-    else:
-        form = RecipeForm()
-        ingredient_form = IngredientForm()
+                for name, quantity in zip(ingredient_names, ingredient_quantities):
+                    if name and quantity:
+                        Ingredients.objects.create(
+                            recipe=recipe,
+                            ingredient_name=name,
+                            quantity=quantity
+                        )
+                return redirect('Recipes:show_recipe', recipe_name_slug=recipe.slug)
+            except IntegrityError:
+                form.add_error('recipe_name', 'This recipe name is already taken. Please choose a different name.')
+                
     return render(request, 'Recipes/add_recipe.html', {'form': form, 'ingredient_form': ingredient_form})
 
 # User logout

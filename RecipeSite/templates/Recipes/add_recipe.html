@@ -33,6 +33,13 @@
                         <div class="form-group">
                             <label for="id_recipe_name">Recipe Name:</label>
                             {{ form.recipe_name }}
+                            {% if form.recipe_name.errors %}
+                            <div class="error-message">
+                                {% for error in form.recipe_name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                         </div>
 
                         {% comment %} Cuisine type input - 

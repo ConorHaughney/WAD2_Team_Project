@@ -50,7 +50,7 @@ class Recipe(models.Model):
     
     # contains the name, cuisine type, who made it, difficulty, length of time, 
     # the instructions, number of serving, the image, and a unique slug used for its url
-    recipe_name = models.CharField(max_length=RECIPE_NAME_MAX_LENGTH, unique=True)
+    recipe_name = models.CharField(max_length=RECIPE_NAME_MAX_LENGTH, unique=True, error_messages={'unique': 'This recipe name is already taken. Please choose a different name.'})
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
