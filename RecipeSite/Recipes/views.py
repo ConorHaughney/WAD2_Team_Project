@@ -189,9 +189,18 @@ def add_recipe(request):
                 recipe = form.save(commit=False)
                 recipe.author = request.user.userprofile  
                 recipe.save()
+                
+                first_ingredient_name = request.POST.get('ingredient_name')
+                first_ingredient_quantity = request.POST.get('quantity')
+                if first_ingredient_name and first_ingredient_quantity:
+                    Ingredients.objects.create(
+                        recipe=recipe,
+                        ingredient_name=first_ingredient_name,
+                        quantity=first_ingredient_quantity
+                    )
             
-                ingredient_names = request.POST.getlist('ingredient_name')
-                ingredient_quantities = request.POST.getlist('quantity')
+                ingredient_names = request.POST.getlist('ingredient_names[]')
+                ingredient_quantities = request.POST.getlist('ingredient_quantities[]')
             
                 for name, quantity in zip(ingredient_names, ingredient_quantities):
                     if name and quantity:
