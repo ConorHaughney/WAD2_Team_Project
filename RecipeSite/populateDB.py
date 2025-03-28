@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 def populate():
     # populate the cuisines table
-    cuisines = ['Italian', 'Chinese', 'Mexican', 'French', 'Japanese']
+    cuisines = ['Italian', 'Chinese', 'Mexican', 'French', 'Japanese', 'Vegetarian']
     for cuisine_name in cuisines:
         Cuisine.objects.get_or_create(name=cuisine_name)
     
@@ -39,7 +39,7 @@ def populate():
         reviewer.save()
     reviewer_profile, created = UserProfile.objects.get_or_create(user=reviewer)
     
-    # creates 5 recipes information
+    # creates 6 recipes information
     recipes = [
         {
             'recipe_name': 'Spaghetti Carbonara',
@@ -112,6 +112,21 @@ def populate():
                 "Serve with soy sauce, wasabi, and pickled ginger."),
             'portion': 4,
             'picture': 'recipe_images/sushi.jpg'
+        },
+        {
+            'recipe_name': 'Mac and Cheese ',
+            'cuisine': 'Vegetarian',
+            'difficulty': 'Medium',
+            'time_taken': 45,
+            'instructions': ("Cook the macaroni in a large saucepan of boiling salted. Drain well and set aside. "
+                "Melt the butter over a medium heat in a saucepan slightly larger than that used for the macaroni. Add the flour and stir to form a roux, cooking for a few minutes. "
+                "Gradually whisk in the milk, a little at a time. Cook to a thickened and smooth sauce. "
+                "Meanwhile, preheat the grill to hot. "
+                "Remove the sauce from the hob, add 175g of the cheddar and stir until it is well combined and melted."
+                "Add the macaroni to the sauce and mix well. Transfer to a deep suitably-sized ovenproof dish."
+                "Sprinkle over the remaining cheddar and the Parmesan and place the dish under the hot grill. Cook until the cheese is browned and bubbling. Serve straightaway."),
+            'portion': 4,
+            'picture': 'recipe_images/macandcheese.jpg'
         }
     ]
     
@@ -119,7 +134,7 @@ def populate():
     recipe_ingredients = {
         'Spaghetti Carbonara': [
             {'ingredient_name': 'Spaghetti', 'quantity': Decimal('200')},
-            {'ingredient_name': 'Eggs', 'quantity': Decimal('2')},
+            {'ingredient_name': 'Eggs', 'quantity': Decimal('200')},
             {'ingredient_name': 'Pancetta', 'quantity': Decimal('100')},
             {'ingredient_name': 'Parmesan', 'quantity': Decimal('50')}
         ],
@@ -146,6 +161,13 @@ def populate():
             {'ingredient_name': 'Fish', 'quantity': Decimal('150')},
             {'ingredient_name': 'Seaweed', 'quantity': Decimal('10')},
             {'ingredient_name': 'Soy Sauce', 'quantity': Decimal('20')}
+        ],
+        'Mac and Cheese ': [
+            {'ingredient_name': 'Macaroni', 'quantity': Decimal('250')},
+            {'ingredient_name': 'Butter', 'quantity': Decimal('40')},
+            {'ingredient_name': 'Plain Flour', 'quantity': Decimal('40')},
+            {'ingredient_name': 'Cheddar', 'quantity': Decimal('250')},
+            {'ingredient_name': 'Parmesan', 'quantity': Decimal('250')}
         ]
     }
 
@@ -165,6 +187,9 @@ def populate():
         ],
         'Sushi': [
             {'rating': 5, 'comment': 'Best sushi I have ever had!'}
+        ],
+        'Mac and Cheese ': [
+            {'rating': 5, 'comment': 'The mac and cheese was really good'}
         ]
     }
     
