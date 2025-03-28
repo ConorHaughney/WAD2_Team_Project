@@ -22,13 +22,11 @@ def home(request):
 
 # Recipe list page
 def recipes(request):
-    recipes_list = Recipe.objects.all()
+    recipes_list = Recipe.objects.annotate(avg_rating=Avg('reviews__rating'))
     
     search_query = request.GET.get('search', '')
     if search_query:
         recipes_list = recipes_list.filter(recipe_name__icontains=search_query)
-        
-    recipes_list = Recipe.objects.annotate(avg_rating=Avg('reviews__rating'))
         
     sort_options = {
         'time_asc': 'Quick Recipes First',
@@ -246,8 +244,8 @@ def add_favourite(request, recipe_name_slug):
 
 # Search recipes 
 def search(request):
-    query = request.GET.get('query', '')
-    recipes = Recipe.objects.filter(recipe_name__icontains=query) if query else []
-    context_dict = {'Recipes': recipes, 'query': query}
+    search_query = request.GET.get('search_query', '')
+    recipes = Recipe.objects.filter(recipe_name__icontains=search_query) if search_query else []
+    context_dict = {'Recipes': recipes, 'search_query': search_query}
     return render(request, 'Recipes/search_recipe.html', context_dict)
 
